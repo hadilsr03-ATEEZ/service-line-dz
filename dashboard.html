@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Provider Dashboard - Manage your profile, services, and reviews on ServiceLine DZ.">
+  <title>Provider Dashboard - ServiceLine DZ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="dashboard">
+    <!-- Sidebar -->
+    <aside class="dashboard-sidebar">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">SL</div>
+        ServiceLine<span>DZ</span>
+      </a>
+
+      <nav class="dashboard-nav">
+        <a href="#" class="active">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+          </svg>
+          Dashboard
+        </a>
+        <a href="#">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+          My Profile
+        </a>
+        <a href="#">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
+          </svg>
+          My Services
+        </a>
+        <a href="#">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="10" x2="21" y2="10"></line>
+          </svg>
+          Availability
+        </a>
+        <a href="#">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+          </svg>
+          Reviews
+        </a>
+        <a href="#">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+          </svg>
+          Messages
+        </a>
+
+        <div class="dashboard-nav-section">
+          <h4>Settings</h4>
+          <a href="#">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="3"></circle>
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+            </svg>
+            Settings
+          </a>
+          <a href="#">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+              <line x1="12" y1="17" x2="12.01" y2="17"></line>
+            </svg>
+            Help & Support
+          </a>
+          <a href="index.html">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+              <polyline points="16 17 21 12 16 7"></polyline>
+              <line x1="21" y1="12" x2="9" y2="12"></line>
+            </svg>
+            Logout
+          </a>
+        </div>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="dashboard-main">
+      <header class="dashboard-header">
+        <div>
+          <h1>Dashboard</h1>
+          <p style="color: var(--text-muted); font-size: 0.875rem;">Welcome back, Ahmed!</p>
+        </div>
+        <div class="dashboard-user">
+          <button class="btn btn-icon btn-ghost" aria-label="Notifications">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+              <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+            </svg>
+          </button>
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=50&h=50&fit=crop&crop=face" alt="Ahmed Benali">
+          <div>
+            <strong style="font-size: 0.9375rem;">Ahmed Benali</strong>
+            <p style="font-size: 0.75rem; color: var(--text-muted);">Master Electrician</p>
+          </div>
+        </div>
+      </header>
+
+      <div class="dashboard-content">
+        <!-- Stats Cards -->
+        <div class="dashboard-stats">
+          <div class="dashboard-stat-card">
+            <div class="icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+            </div>
+            <div class="value">2,847</div>
+            <div class="label">Profile Views</div>
+            <div class="change positive">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                <polyline points="17 6 23 6 23 12"></polyline>
+              </svg>
+              +12% this month
+            </div>
+          </div>
+          <div class="dashboard-stat-card">
+            <div class="icon" style="background: rgba(16, 185, 129, 0.1); color: var(--success);">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+              </svg>
+            </div>
+            <div class="value">156</div>
+            <div class="label">Jobs Completed</div>
+            <div class="change positive">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                <polyline points="17 6 23 6 23 12"></polyline>
+              </svg>
+              +8 this month
+            </div>
+          </div>
+          <div class="dashboard-stat-card">
+            <div class="icon" style="background: rgba(245, 158, 11, 0.1); color: var(--warning);">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+              </svg>
+            </div>
+            <div class="value">4.9</div>
+            <div class="label">Average Rating</div>
+            <div class="change positive">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                <polyline points="17 6 23 6 23 12"></polyline>
+              </svg>
+              +0.2 this month
+            </div>
+          </div>
+          <div class="dashboard-stat-card">
+            <div class="icon" style="background: rgba(6, 182, 212, 0.1); color: var(--accent);">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="12" y1="1" x2="12" y2="23"></line>
+                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+              </svg>
+            </div>
+            <div class="value">245,000 DA</div>
+            <div class="label">Total Earnings</div>
+            <div class="change positive">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                <polyline points="17 6 23 6 23 12"></polyline>
+              </svg>
+              +18% this month
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Bookings & Reviews -->
+        <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 1.5rem;">
+          <!-- Recent Bookings -->
+          <div class="dashboard-card">
+            <div class="dashboard-card-header">
+              <h3>Recent Bookings</h3>
+              <a href="#" class="btn btn-ghost btn-sm">View All</a>
+            </div>
+            <table class="dashboard-table">
+              <thead>
+                <tr>
+                  <th>Client</th>
+                  <th>Service</th>
+                  <th>Date</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <div style="display: flex; align-items: center; gap: 0.75rem;">
+                      <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=40&h=40&fit=crop&crop=face" alt="Amira B." style="width: 36px; height: 36px; border-radius: 50%;">
+                      <span>Amira Boudiaf</span>
+                    </div>
+                  </td>
+                  <td>Electrical Repair</td>
+                  <td>Jun 15, 2024</td>
+                  <td><span class="status-badge pending">Pending</span></td>
+                  <td>
+                    <button class="btn btn-primary btn-sm">Accept</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div style="display: flex; align-items: center; gap: 0.75rem;">
+                      <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop&crop=face" alt="Karim L." style="width: 36px; height: 36px; border-radius: 50%;">
+                      <span>Karim Larbi</span>
+                    </div>
+                  </td>
+                  <td>Panel Upgrade</td>
+                  <td>Jun 14, 2024</td>
+                  <td><span class="status-badge active">Confirmed</span></td>
+                  <td>
+                    <button class="btn btn-secondary btn-sm">View</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div style="display: flex; align-items: center; gap: 0.75rem;">
+                      <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=40&h=40&fit=crop&crop=face" alt="Nadia C." style="width: 36px; height: 36px; border-radius: 50%;">
+                      <span>Nadia Cherif</span>
+                    </div>
+                  </td>
+                  <td>Lighting Installation</td>
+                  <td>Jun 12, 2024</td>
+                  <td><span class="status-badge active">Completed</span></td>
+                  <td>
+                    <button class="btn btn-secondary btn-sm">View</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div style="display: flex; align-items: center; gap: 0.75rem;">
+                      <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=40&h=40&fit=crop&crop=face" alt="Mohamed Z." style="width: 36px; height: 36px; border-radius: 50%;">
+                      <span>Mohamed Zerrouki</span>
+                    </div>
+                  </td>
+                  <td>Emergency Repair</td>
+                  <td>Jun 10, 2024</td>
+                  <td><span class="status-badge active">Completed</span></td>
+                  <td>
+                    <button class="btn btn-secondary btn-sm">View</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Recent Reviews -->
+          <div class="dashboard-card">
+            <div class="dashboard-card-header">
+              <h3>Recent Reviews</h3>
+              <a href="#" class="btn btn-ghost btn-sm">View All</a>
+            </div>
+            <div style="padding: 1rem 1.5rem;">
+              <div style="padding: 1rem 0; border-bottom: 1px solid var(--border);">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                  <strong style="font-size: 0.9375rem;">Amira Boudiaf</strong>
+                  <span class="stars" style="font-size: 0.875rem;">★★★★★</span>
+                </div>
+                <p style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 0.5rem;">Excellent work on my apartment rewiring. Very professional!</p>
+                <span style="font-size: 0.75rem; color: var(--text-muted);">2 weeks ago</span>
+              </div>
+              <div style="padding: 1rem 0; border-bottom: 1px solid var(--border);">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                  <strong style="font-size: 0.9375rem;">Karim Larbi</strong>
+                  <span class="stars" style="font-size: 0.875rem;">★★★★★</span>
+                </div>
+                <p style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 0.5rem;">Quick response to emergency. Highly recommend!</p>
+                <span style="font-size: 0.75rem; color: var(--text-muted);">1 month ago</span>
+              </div>
+              <div style="padding: 1rem 0;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                  <strong style="font-size: 0.9375rem;">Nadia Cherif</strong>
+                  <span class="stars" style="font-size: 0.875rem;">★★★★☆</span>
+                </div>
+                <p style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 0.5rem;">Good work on lighting installation. Arrived a bit late.</p>
+                <span style="font-size: 0.75rem; color: var(--text-muted);">2 months ago</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Services Management -->
+        <div class="dashboard-card" style="margin-top: 1.5rem;">
+          <div class="dashboard-card-header">
+            <h3>My Services</h3>
+            <button class="btn btn-primary btn-sm">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+              Add Service
+            </button>
+          </div>
+          <table class="dashboard-table">
+            <thead>
+              <tr>
+                <th>Service</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Electrical Installation</strong></td>
+                <td>Complete wiring for new constructions</td>
+                <td>From 5,000 DA</td>
+                <td><span class="status-badge active">Active</span></td>
+                <td>
+                  <button class="btn btn-ghost btn-sm">Edit</button>
+                  <button class="btn btn-ghost btn-sm" style="color: var(--error);">Delete</button>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Electrical Repairs</strong></td>
+                <td>Fix faulty wiring, outlets, switches</td>
+                <td>From 2,500 DA</td>
+                <td><span class="status-badge active">Active</span></td>
+                <td>
+                  <button class="btn btn-ghost btn-sm">Edit</button>
+                  <button class="btn btn-ghost btn-sm" style="color: var(--error);">Delete</button>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Panel Upgrades</strong></td>
+                <td>Upgrade electrical panel capacity</td>
+                <td>From 15,000 DA</td>
+                <td><span class="status-badge active">Active</span></td>
+                <td>
+                  <button class="btn btn-ghost btn-sm">Edit</button>
+                  <button class="btn btn-ghost btn-sm" style="color: var(--error);">Delete</button>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Lighting Installation</strong></td>
+                <td>Indoor and outdoor lighting setup</td>
+                <td>From 3,000 DA</td>
+                <td><span class="status-badge active">Active</span></td>
+                <td>
+                  <button class="btn btn-ghost btn-sm">Edit</button>
+                  <button class="btn btn-ghost btn-sm" style="color: var(--error);">Delete</button>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Emergency Services</strong></td>
+                <td>24/7 emergency electrical repairs</td>
+                <td>From 4,000 DA</td>
+                <td><span class="status-badge active">Active</span></td>
+                <td>
+                  <button class="btn btn-ghost btn-sm">Edit</button>
+                  <button class="btn btn-ghost btn-sm" style="color: var(--error);">Delete</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

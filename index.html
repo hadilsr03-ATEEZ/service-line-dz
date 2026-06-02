@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ServiceLine DZ - Connect with trusted service providers in Algeria. Find plumbers, electricians, developers, and more.">
+  <title>ServiceLine DZ - Professional Service Marketplace in Algeria</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">SL</div>
+        ServiceLine<span>DZ</span>
+      </a>
+      
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="search.html">Find Pros</a>
+        <a href="#categories">Categories</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#contact">Contact</a>
+      </div>
+      
+      <div class="nav-buttons">
+        <a href="login.html" class="btn btn-ghost">Sign In</a>
+        <a href="register.html" class="btn btn-primary">Get Started</a>
+      </div>
+      
+      <button class="mobile-menu-btn" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+  
+  <!-- Mobile Navigation -->
+  <div class="mobile-nav">
+    <a href="index.html">Home</a>
+    <a href="search.html">Find Professionals</a>
+    <a href="#categories">Categories</a>
+    <a href="#how-it-works">How It Works</a>
+    <a href="#contact">Contact</a>
+    <a href="login.html" class="btn btn-secondary">Sign In</a>
+    <a href="register.html" class="btn btn-primary">Get Started</a>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+            <path d="M2 17l10 5 10-5"></path>
+            <path d="M2 12l10 5 10-5"></path>
+          </svg>
+          #1 Service Marketplace in Algeria
+        </div>
+        <h1>Find Trusted <span>Professionals</span> Near You</h1>
+        <p class="hero-text">
+          Connect with verified plumbers, electricians, developers, and thousands of skilled service providers across Algeria. Get the job done right.
+        </p>
+        <div class="hero-buttons">
+          <a href="search.html" class="btn btn-primary btn-lg">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            Find a Professional
+          </a>
+          <a href="register.html" class="btn btn-outline btn-lg">Become a Provider</a>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <div class="hero-stat-value">5,000+</div>
+            <div class="hero-stat-label">Professionals</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-value">50,000+</div>
+            <div class="hero-stat-label">Happy Clients</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-value">48</div>
+            <div class="hero-stat-label">Wilayas Covered</div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-image">
+        <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=600&h=500&fit=crop" alt="Professional service provider at work">
+        <div class="hero-card hero-card-1">
+          <div class="hero-card-content">
+            <div class="hero-card-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+              </svg>
+            </div>
+            <div class="hero-card-text">
+              <h4>Verified Pros</h4>
+              <p>100% Background Checked</p>
+            </div>
+          </div>
+        </div>
+        <div class="hero-card hero-card-2">
+          <div class="hero-card-content">
+            <div class="hero-card-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+              </svg>
+            </div>
+            <div class="hero-card-text">
+              <h4>4.9 Rating</h4>
+              <p>Avg. Customer Score</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Search Section -->
+  <section class="search-section">
+    <div class="container">
+      <form class="search-box" action="search.html" method="GET">
+        <div class="search-input-group">
+          <label>Service</label>
+          <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" placeholder="What service do you need?" name="service">
+        </div>
+        <div class="search-input-group">
+          <label>Location</label>
+          <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+            <circle cx="12" cy="10" r="3"></circle>
+          </svg>
+          <select name="location">
+            <option value="">Select Wilaya</option>
+            <option value="algiers">Algiers</option>
+            <option value="oran">Oran</option>
+            <option value="constantine">Constantine</option>
+            <option value="annaba">Annaba</option>
+            <option value="blida">Blida</option>
+            <option value="setif">Sétif</option>
+            <option value="batna">Batna</option>
+            <option value="tlemcen">Tlemcen</option>
+            <option value="bejaia">Béjaïa</option>
+            <option value="tizi-ouzou">Tizi Ouzou</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          Search
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Categories Section -->
+  <section class="categories" id="categories">
+    <div class="container">
+      <div class="section-header animate-on-scroll">
+        <h2>Popular Categories</h2>
+        <p>Browse through our most requested service categories and find the perfect professional for your needs.</p>
+      </div>
+      <div class="categories-grid">
+        <a href="search.html?category=plumbing" class="category-card animate-on-scroll">
+          <div class="category-icon">🔧</div>
+          <h4>Plumbing</h4>
+          <p>245 pros</p>
+        </a>
+        <a href="search.html?category=electrical" class="category-card animate-on-scroll">
+          <div class="category-icon">⚡</div>
+          <h4>Electrical</h4>
+          <p>189 pros</p>
+        </a>
+        <a href="search.html?category=painting" class="category-card animate-on-scroll">
+          <div class="category-icon">🎨</div>
+          <h4>Painting</h4>
+          <p>156 pros</p>
+        </a>
+        <a href="search.html?category=cleaning" class="category-card animate-on-scroll">
+          <div class="category-icon">🧹</div>
+          <h4>Cleaning</h4>
+          <p>312 pros</p>
+        </a>
+        <a href="search.html?category=development" class="category-card animate-on-scroll">
+          <div class="category-icon">💻</div>
+          <h4>Development</h4>
+          <p>423 pros</p>
+        </a>
+        <a href="search.html?category=tailoring" class="category-card animate-on-scroll">
+          <div class="category-icon">🪡</div>
+          <h4>Tailoring</h4>
+          <p>98 pros</p>
+        </a>
+        <a href="search.html?category=cooking" class="category-card animate-on-scroll">
+          <div class="category-icon">👨‍🍳</div>
+          <h4>Cooking</h4>
+          <p>134 pros</p>
+        </a>
+        <a href="search.html?category=technician" class="category-card animate-on-scroll">
+          <div class="category-icon">🔌</div>
+          <h4>Technician</h4>
+          <p>267 pros</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Professionals -->
+  <section class="featured">
+    <div class="container">
+      <div class="featured-header animate-on-scroll">
+        <div>
+          <h2>Featured Professionals</h2>
+          <p>Top-rated service providers ready to help you</p>
+        </div>
+        <a href="search.html" class="btn btn-outline">View All</a>
+      </div>
+      <div class="professionals-grid">
+        <!-- Professional Card 1 -->
+        <article class="professional-card animate-on-scroll">
+          <div class="professional-cover">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face" alt="Ahmed Benali" class="professional-avatar">
+            <span class="professional-badge">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01" fill="none" stroke="currentColor" stroke-width="2"></polyline>
+              </svg>
+              Verified
+            </span>
+          </div>
+          <div class="professional-content">
+            <h3 class="professional-name">Ahmed Benali</h3>
+            <p class="professional-title">Master Electrician</p>
+            <div class="professional-rating">
+              <span class="stars">★★★★★</span>
+              <span class="rating-text">4.9 (127 reviews)</span>
+            </div>
+            <div class="professional-location">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+              Algiers, Algeria
+            </div>
+            <div class="professional-tags">
+              <span class="tag">Wiring</span>
+              <span class="tag">Installation</span>
+              <span class="tag">Repairs</span>
+            </div>
+            <div class="professional-footer">
+              <div class="professional-price">
+                Starting at <span>2,500 DA</span>/hr
+              </div>
+              <a href="profile.html" class="btn btn-primary btn-sm">View Profile</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Professional Card 2 -->
+        <article class="professional-card animate-on-scroll">
+          <div class="professional-cover">
+            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face" alt="Karim Meziane" class="professional-avatar">
+            <span class="professional-badge">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01" fill="none" stroke="currentColor" stroke-width="2"></polyline>
+              </svg>
+              Verified
+            </span>
+          </div>
+          <div class="professional-content">
+            <h3 class="professional-name">Karim Meziane</h3>
+            <p class="professional-title">Full-Stack Developer</p>
+            <div class="professional-rating">
+              <span class="stars">★★★★★</span>
+              <span class="rating-text">5.0 (89 reviews)</span>
+            </div>
+            <div class="professional-location">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+              Oran, Algeria
+            </div>
+            <div class="professional-tags">
+              <span class="tag">React</span>
+              <span class="tag">Node.js</span>
+              <span class="tag">Mobile Apps</span>
+            </div>
+            <div class="professional-footer">
+              <div class="professional-price">
+                Starting at <span>5,000 DA</span>/hr
+              </div>
+              <a href="profile.html" class="btn btn-primary btn-sm">View Profile</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Professional Card 3 -->
+        <article class="professional-card animate-on-scroll">
+          <div class="professional-cover">
+            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=100&h=100&fit=crop&crop=face" alt="Fatima Zohra" class="professional-avatar">
+            <span class="professional-badge">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01" fill="none" stroke="currentColor" stroke-width="2"></polyline>
+              </svg>
+              Verified
+            </span>
+          </div>
+          <div class="professional-content">
+            <h3 class="professional-name">Fatima Zohra</h3>
+            <p class="professional-title">Interior Designer</p>
+            <div class="professional-rating">
+              <span class="stars">★★★★★</span>
+              <span class="rating-text">4.8 (156 reviews)</span>
+            </div>
+            <div class="professional-location">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+              Constantine, Algeria
+            </div>
+            <div class="professional-tags">
+              <span class="tag">Residential</span>
+              <span class="tag">Commercial</span>
+              <span class="tag">3D Design</span>
+            </div>
+            <div class="professional-footer">
+              <div class="professional-price">
+                Starting at <span>8,000 DA</span>/project
+              </div>
+              <a href="profile.html" class="btn btn-primary btn-sm">View Profile</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Professional Card 4 -->
+        <article class="professional-card animate-on-scroll">
+          <div class="professional-cover">
+            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=100&h=100&fit=crop&crop=face" alt="Youcef Hamidi" class="professional-avatar">
+            <span class="professional-badge">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01" fill="none" stroke="currentColor" stroke-width="2"></polyline>
+              </svg>
+              Verified
+            </span>
+          </div>
+          <div class="professional-content">
+            <h3 class="professional-name">Youcef Hamidi</h3>
+            <p class="professional-title">Professional Plumber</p>
+            <div class="professional-rating">
+              <span class="stars">★★★★☆</span>
+              <span class="rating-text">4.7 (203 reviews)</span>
+            </div>
+            <div class="professional-location">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+              Blida, Algeria
+            </div>
+            <div class="professional-tags">
+              <span class="tag">Emergency</span>
+              <span class="tag">Installation</span>
+              <span class="tag">Maintenance</span>
+            </div>
+            <div class="professional-footer">
+              <div class="professional-price">
+                Starting at <span>2,000 DA</span>/hr
+              </div>
+              <a href="profile.html" class="btn btn-primary btn-sm">View Profile</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="how-it-works" id="how-it-works">
+    <div class="container">
+      <div class="section-header animate-on-scroll">
+        <h2>How It Works</h2>
+        <p>Getting started with ServiceLine DZ is easy. Follow these simple steps.</p>
+      </div>
+      <div class="steps-grid">
+        <div class="step-card animate-on-scroll">
+          <div class="step-number">1</div>
+          <h3>Search</h3>
+          <p>Browse our extensive network of verified professionals by category, location, or specific skills.</p>
+        </div>
+        <div class="step-card animate-on-scroll">
+          <div class="step-number">2</div>
+          <h3>Compare</h3>
+          <p>View profiles, ratings, reviews, and pricing to find the perfect match for your project.</p>
+        </div>
+        <div class="step-card animate-on-scroll">
+          <div class="step-number">3</div>
+          <h3>Connect</h3>
+          <p>Contact the professional directly, discuss your needs, and schedule the service.</p>
+        </div>
+        <div class="step-card animate-on-scroll">
+          <div class="step-number">4</div>
+          <h3>Review</h3>
+          <p>After the job is done, leave a review to help others find quality service providers.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="testimonials">
+    <div class="container">
+      <div class="section-header animate-on-scroll">
+        <h2>What Our Users Say</h2>
+        <p>Join thousands of satisfied clients and service providers across Algeria.</p>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card animate-on-scroll">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"ServiceLine DZ helped me find an excellent electrician within hours. The platform is easy to use, and the professional was punctual and skilled. Highly recommended!"</p>
+          <div class="testimonial-author">
+            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=60&h=60&fit=crop&crop=face" alt="Amira Boudiaf" class="testimonial-avatar">
+            <div class="testimonial-info">
+              <h4>Amira Boudiaf</h4>
+              <p>Homeowner, Algiers</p>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card animate-on-scroll">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"As a freelance developer, this platform has been a game-changer. I get consistent projects and the clients are serious about their work. Best decision I made!"</p>
+          <div class="testimonial-author">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=60&h=60&fit=crop&crop=face" alt="Mehdi Saadaoui" class="testimonial-avatar">
+            <div class="testimonial-info">
+              <h4>Mehdi Saadaoui</h4>
+              <p>Web Developer, Oran</p>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card animate-on-scroll">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"I needed emergency plumbing services at night, and ServiceLine DZ connected me with a verified professional who solved the problem quickly. Excellent service!"</p>
+          <div class="testimonial-author">
+            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=60&h=60&fit=crop&crop=face" alt="Nadia Cherif" class="testimonial-avatar">
+            <div class="testimonial-info">
+              <h4>Nadia Cherif</h4>
+              <p>Business Owner, Constantine</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Statistics -->
+  <section class="statistics">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-card animate-on-scroll">
+          <div class="stat-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+          </div>
+          <div class="stat-value">5,000+</div>
+          <div class="stat-label">Verified Professionals</div>
+        </div>
+        <div class="stat-card animate-on-scroll">
+          <div class="stat-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+              <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            </svg>
+          </div>
+          <div class="stat-value">50,000+</div>
+          <div class="stat-label">Projects Completed</div>
+        </div>
+        <div class="stat-card animate-on-scroll">
+          <div class="stat-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+            </svg>
+          </div>
+          <div class="stat-value">4.8</div>
+          <div class="stat-label">Average Rating</div>
+        </div>
+        <div class="stat-card animate-on-scroll">
+          <div class="stat-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+          </div>
+          <div class="stat-value">48</div>
+          <div class="stat-label">Wilayas Covered</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta">
+    <div class="container">
+      <h2>Ready to Get Started?</h2>
+      <p>Join thousands of clients and professionals already using ServiceLine DZ. Find the right service provider or grow your business today.</p>
+      <div class="cta-buttons">
+        <a href="search.html" class="btn btn-primary btn-lg">Find a Professional</a>
+        <a href="register.html" class="btn btn-outline btn-lg">Register as Provider</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer" id="contact">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">
+            <div class="logo-icon">SL</div>
+            ServiceLine<span>DZ</span>
+          </a>
+          <p>Connecting clients with trusted service providers across Algeria since 2024.</p>
+          <div class="social-links">
+            <a href="#" class="social-link" aria-label="Facebook">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+              </svg>
+            </a>
+            <a href="#" class="social-link" aria-label="Twitter">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+              </svg>
+            </a>
+            <a href="#" class="social-link" aria-label="Instagram">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+              </svg>
+            </a>
+            <a href="#" class="social-link" aria-label="LinkedIn">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                <rect x="2" y="9" width="4" height="12"></rect>
+                <circle cx="4" cy="4" r="2"></circle>
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h4>For Clients</h4>
+          <ul>
+            <li><a href="search.html">Find Professionals</a></li>
+            <li><a href="#categories">Browse Categories</a></li>
+            <li><a href="#how-it-works">How It Works</a></li>
+            <li><a href="#">Safety & Trust</a></li>
+            <li><a href="#">Help Center</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>For Providers</h4>
+          <ul>
+            <li><a href="register.html">Become a Provider</a></li>
+            <li><a href="dashboard.html">Provider Dashboard</a></li>
+            <li><a href="#">Success Stories</a></li>
+            <li><a href="#">Resources</a></li>
+            <li><a href="#">Community</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Press</a></li>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="#">Blog</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 ServiceLine DZ. All rights reserved.</p>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Cookie Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
