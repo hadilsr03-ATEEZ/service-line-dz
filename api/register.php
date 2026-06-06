@@ -91,9 +91,63 @@ $stmt->bind_param(
 
 if ($stmt->execute()) {
 
+    $userId = $stmt->insert_id;
+
+    if ($userType === "provider") {
+
+        $providerSql = "
+        INSERT INTO provider
+        (
+            providerId
+        )
+        VALUES
+        (
+            ?
+        )
+        ";
+
+        $providerStmt =
+            $conn->prepare(
+                $providerSql
+            );
+
+        $providerStmt->bind_param(
+            "i",
+            $userId
+        );
+
+        $providerStmt->execute();
+
+    } else {
+
+        $clientSql = "
+        INSERT INTO client
+        (
+            clientId
+        )
+        VALUES
+        (
+            ?
+        )
+        ";
+
+        $clientStmt =
+            $conn->prepare(
+                $clientSql
+            );
+
+        $clientStmt->bind_param(
+            "i",
+            $userId
+        );
+
+        $clientStmt->execute();
+
+    }
+
     echo json_encode([
         "message" => "Registration successful",
-        "userId" => $stmt->insert_id
+        "userId" => $userId
     ]);
 
 } else {

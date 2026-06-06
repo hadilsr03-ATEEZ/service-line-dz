@@ -3,12 +3,459 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Ahmed Benali - Master Electrician in Algiers. View profile, services, reviews, and contact information.">
-  <title>Ahmed Benali - Master Electrician | ServiceLine DZ</title>
+  <meta name="description" content="View professional profile, services, portfolio, and contact information on ServiceLine DZ.">
+  <title>Professional Profile | ServiceLine DZ</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
+  <style>
+    /* Portfolio Gallery Styles */
+    .portfolio-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .portfolio-gallery-item {
+      aspect-ratio: 1;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .portfolio-gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .portfolio-gallery-item:hover img {
+      transform: scale(1.05);
+    }
+
+    .portfolio-gallery-item::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0);
+      transition: background 0.3s ease;
+    }
+
+    .portfolio-gallery-item:hover::after {
+      background: rgba(0, 0, 0, 0.1);
+    }
+
+    /* Lightbox */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.95);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .lightbox.active {
+      display: flex;
+    }
+
+    .lightbox-content {
+      position: relative;
+      max-width: 90vw;
+      max-height: 90vh;
+    }
+
+    .lightbox-content img {
+      max-width: 100%;
+      max-height: 85vh;
+      border-radius: var(--radius-lg);
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: -40px;
+      right: 0;
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+      padding: 0.5rem;
+    }
+
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      color: white;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s ease;
+    }
+
+    .lightbox-nav:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .lightbox-prev {
+      left: -60px;
+    }
+
+    .lightbox-next {
+      right: -60px;
+    }
+
+    /* Emergency Badge */
+    .emergency-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1rem;
+      background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(239, 68, 68, 0.05) 100%);
+      border: 1px solid rgba(239, 68, 68, 0.2);
+      border-radius: var(--radius);
+      color: #dc2626;
+      font-weight: 600;
+      font-size: 0.875rem;
+      margin-top: 1rem;
+    }
+
+    .emergency-badge svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    /* Categories Display */
+    .categories-display {
+      margin-top: 0.75rem;
+    }
+
+    .main-category-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: var(--primary);
+      color: white;
+      border-radius: var(--radius);
+      font-weight: 600;
+      font-size: 0.875rem;
+      margin-right: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .additional-categories {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .additional-category-tag {
+      padding: 0.375rem 0.75rem;
+      background: var(--background-alt);
+      color: var(--text-secondary);
+      border-radius: var(--radius);
+      font-size: 0.8125rem;
+      font-weight: 500;
+    }
+
+    /* Social Links */
+    .social-contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .social-contact-link {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      background: var(--background-alt);
+      border-radius: var(--radius);
+      color: var(--text-primary);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .social-contact-link:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    .social-contact-link svg {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+    }
+
+    .social-contact-link.whatsapp {
+      background: #25D366;
+      color: white;
+    }
+
+    .social-contact-link.whatsapp:hover {
+      background: #128C7E;
+    }
+
+    /* Enhanced Services Display */
+    .service-item-enhanced {
+      background: var(--background-alt);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+    }
+
+    .service-item-enhanced:last-child {
+      margin-bottom: 0;
+    }
+
+    .service-item-enhanced .service-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 0.5rem;
+    }
+
+    .service-item-enhanced h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .service-item-enhanced .service-price {
+      font-weight: 700;
+      color: var(--primary);
+      white-space: nowrap;
+    }
+
+    .service-item-enhanced .service-description {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    @media (max-width: 768px) {
+      .lightbox-nav {
+        display: none;
+      }
+
+      .portfolio-gallery {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .portfolio-gallery {
+  display: grid;
+  grid-template-columns:
+    repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.portfolio-item {
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  aspect-ratio: 1;
+}
+
+.portfolio-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: 0.3s;
+}
+
+.portfolio-item:hover img {
+  transform: scale(1.05);
+}
+
+.availability-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.availability-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem;
+  border-radius: 10px;
+  background: var(--background-alt);
+}
+
+.availability-day {
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.availability-hours {
+  color: var(--text-secondary);
+}
+
+.qualification-file {
+  padding: 0.75rem;
+  margin-bottom: 0.5rem;
+  background: var(--background-alt);
+  border-radius: 10px;
+}
+
+.qualification-file a {
+  text-decoration: none;
+  color: var(--primary);
+  font-weight: 500;
+}
+
+.professional-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.professional-tag {
+  padding: 0.5rem 1rem;
+  background: var(--background-alt);
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.member-since {
+
+  color: #64748b;
+
+  font-size: 0.95rem;
+
+  margin-bottom: 0.75rem;
+}
+
+.profile-verified {
+
+  display: inline-flex !important;
+  align-items: center;
+  gap: 0.4rem;
+
+  background: #10b981;
+  color: white;
+
+  padding: 0.4rem 0.8rem;
+  border-radius: 999px;
+
+  font-size: 0.85rem;
+  font-weight: 600;
+
+  width: fit-content;
+  white-space: nowrap;
+}
+
+.profile-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.profile-details {
+  flex: 1;
+}
+
+.profile-top-actions {
+  display: flex;
+  gap: 1rem;
+  flex-shrink: 0;
+}
+
+.save-btn {
+  background: white;
+  border: 1px solid #d1d5db;
+  border-radius: 12px;
+  padding: 0.9rem 1.5rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.save-btn.saved {
+
+  background: #10b981;
+  color: white;
+  border-color: #10b981;
+
+}
+
+.contact-btn,
+.save-btn {
+
+  padding: 0.9rem 1.5rem;
+
+  border: 1px solid #d1d5db;
+
+  border-radius: 12px;
+
+  background: white;
+
+  cursor: pointer;
+
+  font-weight: 600;
+
+}
+
+.contact-btn {
+
+  background: #2563eb;
+  color: white;
+
+  border: none;
+  border-radius: 12px;
+
+  padding: 0.9rem 1.5rem;
+
+  font-weight: 600;
+  cursor: pointer;
+
+}
+
+.contact-btn:hover {
+
+  background: #1d4ed8;
+
+}
+
+.contact-btn,
+.save-btn {
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+
+}
+
+.social-contact-link svg {
+
+  width: 20px;
+  height: 20px;
+
+  flex-shrink: 0;
+
+}
+
+
+  </style>
 </head>
 <body>
   <!-- Navigation -->
@@ -54,289 +501,414 @@
   <main class="profile-page">
     <!-- Cover Photo -->
     <div class="profile-cover">
-      <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=1200&h=300&fit=crop" alt="Electrical work">
+      <img id="coverPhoto" src="" alt="">
     </div>
 
-    <!-- Profile Header -->
-    <section class="profile-header">
-      <div class="container">
-        <div class="profile-avatar-container">
-          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face" alt="Ahmed Benali" class="profile-avatar">
-          <div class="profile-verified" title="Verified Professional">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <polyline points="20 6 9 17 4 12"></polyline>
-            </svg>
-          </div>
-        </div>
-        
-        <div class="profile-info">
-          <div class="profile-details">
-            <h1>Ahmed Benali</h1>
-            <p class="profile-title">Master Electrician</p>
-            <div class="profile-meta">
-              <div class="profile-meta-item">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                  <circle cx="12" cy="10" r="3"></circle>
-                </svg>
-                <span>Algiers, Algeria</span>
-              </div>
-              <div class="profile-meta-item">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                  <line x1="16" y1="2" x2="16" y2="6"></line>
-                  <line x1="8" y1="2" x2="8" y2="6"></line>
-                  <line x1="3" y1="10" x2="21" y2="10"></line>
-                </svg>
-                <span>Member since 2022</span>
-              </div>
-              <div class="profile-meta-item">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-                </svg>
-                <span>4.9 (127 reviews)</span>
-              </div>
-              <div class="profile-meta-item">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                  <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                </svg>
-                <span>156 jobs completed</span>
-              </div>
-            </div>
-          </div>
-          <div class="profile-actions">
-            <button class="btn btn-primary btn-lg">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-              </svg>
-              Contact
-            </button>
-            <button class="btn btn-secondary btn-lg">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
-              </svg>
-              Save
-            </button>
-          </div>
-        </div>
+  <!-- Profile Header -->
+<section class="profile-header">
+
+  <div class="container">
+
+    <div class="profile-avatar-container">
+
+      <img
+        id="profilePhoto"
+        src=""
+        alt=""
+        class="profile-avatar">
+
+      <div
+        id="verifiedBadge"
+        class="profile-verified"
+        style="display: none;">
+
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2">
+
+          <polyline points="20 6 9 17 4 12"></polyline>
+
+        </svg>
+
+        <span>Verified</span>
+
       </div>
-    </section>
 
-    <!-- Profile Content -->
-    <section class="profile-content">
-      <div class="container">
-        <div class="profile-layout">
-          <!-- Main Content -->
-          <div class="profile-main">
-            <!-- About Section -->
-            <div class="profile-section">
-              <h3>About</h3>
-              <p>Professional electrician with over 15 years of experience in residential and commercial electrical services. I specialize in electrical installations, repairs, maintenance, and troubleshooting. Certified and licensed to work across Algiers and surrounding areas.</p>
-              <p style="margin-top: 1rem;">I take pride in delivering quality work with attention to safety and detail. Whether you need a simple repair or a complete electrical system installation, I&apos;m here to help. All my work comes with a satisfaction guarantee.</p>
+    </div>
+
+    <div class="profile-info">
+
+  <div class="profile-details">
+
+    <h1 id="fullName"></h1>
+
+    <p
+      id="profession"
+      class="profile-title">
+    </p>
+
+    <div class="profile-meta">
+
+      <div class="profile-meta-item">
+
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+          <circle cx="12" cy="10" r="3"></circle>
+        </svg>
+
+        <span id="location"></span>
+
+      </div>
+
+      <div class="profile-meta-item">
+
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="4" width="18" height="18" rx="2"></rect>
+          <line x1="16" y1="2" x2="16" y2="6"></line>
+          <line x1="8" y1="2" x2="8" y2="6"></line>
+          <line x1="3" y1="10" x2="21" y2="10"></line>
+        </svg>
+
+        <span id="memberSince"></span>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="profile-top-actions">
+
+    <button id="contactBtn" class="contact-btn">
+
+  <svg
+    width="20"
+    height="20"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2">
+
+    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+
+  </svg>
+
+  Contact
+
+</button>
+
+    <button
+  id="saveProfileBtn"
+  class="save-btn">
+
+  <svg
+    width="20"
+    height="20"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2">
+
+    <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+
+  </svg>
+
+  Save
+
+</button>
+
+  </div>
+
+</div>
+
+  </div>
+
+</section>
+
+<!-- Profile Content -->
+<section class="profile-content">
+  <div class="container">
+    <div class="profile-layout">
+
+      <!-- Main Content -->
+      <div class="profile-main">
+
+        <!-- About Section -->
+        <div class="profile-section">
+          <h3>About</h3>
+          <p id="aboutMe"></p>
+        </div>
+
+        <!-- Categories Section -->
+        <div class="profile-section">
+
+          <h3>Service Categories</h3>
+
+          <div class="categories-display">
+
+            <span
+              id="mainCategory"
+              class="main-category-badge">
+            </span>
+
+            <div
+              id="additionalCategories"
+              class="additional-categories">
             </div>
 
-            <!-- Services Section -->
-            <div class="profile-section">
-              <h3>Services Offered</h3>
-              <div class="services-list">
-                <div class="service-item">
-                  <div class="service-info">
-                    <h4>Electrical Installation</h4>
-                    <p>Complete wiring for new constructions and renovations</p>
-                  </div>
-                  <div class="service-price">From 5,000 DA</div>
-                </div>
-                <div class="service-item">
-                  <div class="service-info">
-                    <h4>Electrical Repairs</h4>
-                    <p>Fix faulty wiring, outlets, switches, and circuit breakers</p>
-                  </div>
-                  <div class="service-price">From 2,500 DA</div>
-                </div>
-                <div class="service-item">
-                  <div class="service-info">
-                    <h4>Panel Upgrades</h4>
-                    <p>Upgrade your electrical panel for increased capacity</p>
-                  </div>
-                  <div class="service-price">From 15,000 DA</div>
-                </div>
-                <div class="service-item">
-                  <div class="service-info">
-                    <h4>Lighting Installation</h4>
-                    <p>Indoor and outdoor lighting setup and design</p>
-                  </div>
-                  <div class="service-price">From 3,000 DA</div>
-                </div>
-                <div class="service-item">
-                  <div class="service-info">
-                    <h4>Emergency Services</h4>
-                    <p>24/7 emergency electrical repairs</p>
-                  </div>
-                  <div class="service-price">From 4,000 DA</div>
-                </div>
-              </div>
-            </div>
+          </div>
 
-            <!-- Experience Section -->
-            <div class="profile-section">
-              <h3>Experience & Qualifications</h3>
-              <ul style="list-style: disc; padding-left: 1.5rem; color: var(--text-secondary);">
-                <li style="margin-bottom: 0.5rem;">15+ years of professional experience</li>
-                <li style="margin-bottom: 0.5rem;">Licensed Master Electrician - Algeria National Board</li>
-                <li style="margin-bottom: 0.5rem;">Certified in Industrial and Commercial Electrical Systems</li>
-                <li style="margin-bottom: 0.5rem;">Safety Training Certification - INPRP</li>
-                <li style="margin-bottom: 0.5rem;">Specialized in Smart Home Installations</li>
-              </ul>
-            </div>
+        </div>
+
+        <!-- Services Section -->
+        <div class="profile-section">
+
+          <h3>Services Offered</h3>
+
+          <div
+            id="servicesContainer"
+            class="services-list-enhanced">
+          </div>
+
+        </div>
+
+        <!-- Portfolio Section -->
+        <div class="profile-section">
+
+          <h3>Portfolio / Previous Work</h3>
+
+          <p style="color: var(--text-secondary); margin-bottom: 0.5rem;">
+            Click on any image to view larger
+          </p>
+
+          <div
+            id="portfolioGallery"
+            class="portfolio-gallery">
+          </div>
+
+        </div>
+
+        <!-- Experience Section -->
+<div class="profile-section">
+
+  <h3>Experience & Qualifications</h3>
+
+  <p>
+    <strong>Experience:</strong>
+    <span id="experienceText"></span>
+  </p>
+
+  <div
+    id="qualificationsText"
+    style="margin-top: 1rem;">
+  </div>
+
+  <div
+    id="qualificationFilesContainer"
+    style="margin-top: 1rem;">
+  </div>
+
+</div>
+
+      </div>
+
 
             <!-- Reviews Section -->
-            <div class="profile-section">
-              <div class="reviews-header">
-                <div class="reviews-summary">
-                  <div class="reviews-score">4.9</div>
-                  <div class="reviews-stars">
-                    <span class="stars">★★★★★</span>
-                    <span class="reviews-count">Based on 127 reviews</span>
-                  </div>
-                </div>
-                <button class="btn btn-outline btn-sm">Write a Review</button>
-              </div>
-
-              <!-- Review Cards -->
-              <div class="review-card">
-                <div class="review-header">
-                  <div class="review-author">
-                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=60&h=60&fit=crop&crop=face" alt="Amira Boudiaf">
-                    <div>
-                      <h4>Amira Boudiaf</h4>
-                      <p>2 weeks ago</p>
-                    </div>
-                  </div>
-                  <span class="stars">★★★★★</span>
-                </div>
-                <p class="review-text">Ahmed did an excellent job rewiring my apartment. He was professional, punctual, and explained everything clearly. The work was completed within the estimated time and budget. Highly recommend!</p>
-              </div>
-
-              <div class="review-card">
-                <div class="review-header">
-                  <div class="review-author">
-                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=60&h=60&fit=crop&crop=face" alt="Karim Larbi">
-                    <div>
-                      <h4>Karim Larbi</h4>
-                      <p>1 month ago</p>
-                    </div>
-                  </div>
-                  <span class="stars">★★★★★</span>
-                </div>
-                <p class="review-text">Had an electrical emergency at night and Ahmed responded quickly. Fixed the issue in no time. Very reliable and skilled. Will definitely call him again for future electrical work.</p>
-              </div>
-
-              <div class="review-card">
-                <div class="review-header">
-                  <div class="review-author">
-                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=60&h=60&fit=crop&crop=face" alt="Nadia Cherif">
-                    <div>
-                      <h4>Nadia Cherif</h4>
-                      <p>2 months ago</p>
-                    </div>
-                  </div>
-                  <span class="stars">★★★★☆</span>
-                </div>
-                <p class="review-text">Good work on installing new lighting in my living room. The only reason for 4 stars is that he arrived a bit late, but the quality of work was excellent. Would recommend.</p>
-              </div>
-
-              <button class="btn btn-secondary w-full mt-3" style="justify-content: center;">
-                Load More Reviews
-              </button>
-            </div>
-          </div>
+            
 
           <!-- Sidebar -->
           <aside class="profile-sidebar">
-            <div class="profile-section">
-              <h3>Contact Information</h3>
-              <div class="contact-info">
-                <div class="contact-item">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-                  </svg>
-                  <span>0555 12 34 56</span>
-                </div>
-                <div class="contact-item">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                    <polyline points="22,6 12,13 2,6"></polyline>
-                  </svg>
-                  <span>ahmed.benali@email.com</span>
-                </div>
-                <div class="contact-item">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                    <circle cx="12" cy="10" r="3"></circle>
-                  </svg>
-                  <span>Algiers, Bab El Oued</span>
-                </div>
+          
+          <!-- Contact Information -->
+          <div class="profile-section">
+          
+            <h3>Contact Information</h3>
+          
+            <div class="contact-info">
+          
+              <div class="contact-item">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                </svg>
+                <span id="phoneNumber"></span>
               </div>
+          
+            
+          
+              <!-- Social Contact Links -->
+              <div class="social-contact-links">
+          
+                <a
+                  id="whatsappLink"
+                  href="#"
+                  target="_blank"
+                  class="social-contact-link whatsapp">
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                  </svg>
+                  WhatsApp
+                </a>
+
+          
+                <a
+                  id="instagramLink"
+                  href="#"
+                  target="_blank"
+                  class="social-contact-link">
+                
+                  <svg viewBox="0 0 24 24"
+                       fill="none"
+                       stroke="currentColor"
+                       stroke-width="2">
+                
+                    <rect x="2" y="2"
+                          width="20"
+                          height="20"
+                          rx="5"
+                          ry="5"></rect>
+                
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                
+                    <line x1="17.5"
+                          y1="6.5"
+                          x2="17.51"
+                          y2="6.5"></line>
+                
+                  </svg>
+                
+                  <span>Instagram</span>
+                
+                </a>
+          
+                <a
+                  id="facebookLink"
+                  href="#"
+                  target="_blank"
+                  class="social-contact-link">
+                
+                  <svg viewBox="0 0 24 24"
+                       fill="currentColor">
+                
+                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                
+                  </svg>
+                
+                  <span>Facebook</span>
+                
+                </a>
+          
+                <a
+                  id="tiktokLink"
+                  href="#"
+                  target="_blank"
+                  class="social-contact-link">
+                
+                  <svg viewBox="0 0 24 24"
+                       fill="currentColor">
+                
+                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"></path>
+                
+                  </svg>
+                
+                  <span>TikTok</span>
+                
+                </a>
+          
+              </div>
+          
             </div>
 
+          </div>
+          
             <div class="profile-section">
+            
               <h3>Availability</h3>
-              <div class="availability-list">
-                <div class="availability-item">
-                  <span>Monday</span>
-                  <span>8:00 AM - 6:00 PM</span>
-                </div>
-                <div class="availability-item">
-                  <span>Tuesday</span>
-                  <span>8:00 AM - 6:00 PM</span>
-                </div>
-                <div class="availability-item">
-                  <span>Wednesday</span>
-                  <span>8:00 AM - 6:00 PM</span>
-                </div>
-                <div class="availability-item">
-                  <span>Thursday</span>
-                  <span>8:00 AM - 6:00 PM</span>
-                </div>
-                <div class="availability-item">
-                  <span>Friday</span>
-                  <span>Closed</span>
-                </div>
-                <div class="availability-item">
-                  <span>Saturday</span>
-                  <span>9:00 AM - 4:00 PM</span>
-                </div>
-                <div class="availability-item">
-                  <span>Sunday</span>
-                  <span>9:00 AM - 4:00 PM</span>
-                </div>
+            
+              <div
+                id="availabilityList"
+                class="availability-list">
               </div>
-              <p class="form-text" style="margin-top: 1rem;">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2" style="display: inline; vertical-align: middle;">
+            
+              <div
+                id="emergencyBadge"
+                class="emergency-badge"
+                style="display:none;">
+            
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <circle cx="12" cy="12" r="10"></circle>
                   <polyline points="12 6 12 12 16 14"></polyline>
                 </svg>
-                Emergency services available 24/7
-              </p>
+            
+                24/7 Emergency Services Available
+            
+              </div>
+            
             </div>
 
-            <div class="profile-section">
-              <h3>Service Areas</h3>
-              <div class="professional-tags" style="margin-top: 0.5rem;">
-                <span class="tag">Algiers Center</span>
-                <span class="tag">Bab El Oued</span>
-                <span class="tag">Hussein Dey</span>
-                <span class="tag">El Harrach</span>
-                <span class="tag">Kouba</span>
-                <span class="tag">Bir Mourad Raïs</span>
+<div class="profile-section">
+
+  <h3>Service Areas</h3>
+
+  <div
+    id="serviceAreasContainer"
+    class="professional-tags"
+    style="margin-top:0.5rem;">
+  </div>
+
+</div>
+            
+            </aside>
+            </div>
+            </div>
+            </section>
+            </main>
+            
+            <!-- Lightbox for Portfolio -->
+            <div class="lightbox" id="lightbox">
+              <div class="lightbox-content">
+            
+                <button
+                  class="lightbox-close"
+                  onclick="closeLightbox()">
+            
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                  </svg>
+            
+                </button>
+            
+                <button
+                  class="lightbox-nav lightbox-prev"
+                  onclick="navigateLightbox(-1)">
+            
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                  </svg>
+            
+                </button>
+            
+                <img
+                  id="lightbox-image"
+                  src=""
+                  alt="Portfolio image">
+            
+                <button
+                  class="lightbox-nav lightbox-next"
+                  onclick="navigateLightbox(1)">
+            
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                  </svg>
+            
+                </button>
+            
               </div>
             </div>
-          </aside>
-        </div>
-      </div>
-    </section>
-  </main>
 
   <!-- Footer -->
   <footer class="footer">
@@ -418,5 +990,794 @@
   </footer>
 
   <script src="js/main.js"></script>
+  <script>
+  
+  let portfolioImages = [];
+  
+  let currentImageIndex = 0;
+  
+  function openLightbox(index) {
+  
+    currentImageIndex = index;
+  
+    const lightbox =
+      document.getElementById(
+        "lightbox"
+      );
+  
+    const lightboxImage =
+      document.getElementById(
+        "lightbox-image"
+      );
+  
+    lightboxImage.src =
+      portfolioImages[index];
+  
+    lightbox.classList.add(
+      "active"
+    );
+  
+    document.body.style.overflow =
+      "hidden";
+  }
+  
+  function closeLightbox() {
+  
+    const lightbox =
+      document.getElementById(
+        "lightbox"
+      );
+  
+    lightbox.classList.remove(
+      "active"
+    );
+  
+    document.body.style.overflow =
+      "";
+  }
+  
+  function navigateLightbox(direction) {
+  
+    currentImageIndex += direction;
+  
+    if (
+      currentImageIndex < 0
+    ) {
+  
+      currentImageIndex =
+        portfolioImages.length - 1;
+    }
+  
+    if (
+      currentImageIndex >=
+      portfolioImages.length
+    ) {
+  
+      currentImageIndex = 0;
+    }
+  
+    document.getElementById(
+      "lightbox-image"
+    ).src =
+      portfolioImages[
+        currentImageIndex
+      ];
+  }
+  
+  document.addEventListener(
+    "keydown",
+    function (e) {
+  
+      if (
+        e.key === "Escape"
+      ) {
+        closeLightbox();
+      }
+  
+      if (
+        e.key === "ArrowLeft"
+      ) {
+        navigateLightbox(-1);
+      }
+  
+      if (
+        e.key === "ArrowRight"
+      ) {
+        navigateLightbox(1);
+      }
+    }
+  );
+  
+  document
+    .getElementById(
+      "lightbox"
+    )
+    .addEventListener(
+      "click",
+      function (e) {
+  
+        if (
+          e.target === this
+        ) {
+  
+          closeLightbox();
+        }
+      }
+    );
+
+    /* =========================
+   Load Profile
+========================= */
+
+const urlParams =
+  new URLSearchParams(
+    window.location.search
+  );
+
+const profileId =
+  urlParams.get("id");
+
+
+
+if (profileId) {
+
+  fetch(
+    `api/get_profile.php?id=${profileId}`
+  )
+  .then(response =>
+    response.json()
+  )
+  .then(data => {
+
+    if (!data.success) {
+      return;
+    }
+
+    const profile =
+      data.profile;
+
+    console.log(profile);
+
+    document.getElementById(
+      "fullName"
+    ).textContent =
+      profile.fullName || "";
+
+    document.getElementById(
+      "profession"
+    ).textContent =
+      profile.profession || "";
+
+    document.getElementById(
+      "location"
+    ).textContent =
+      `${profile.commune}, ${profile.wilaya}`;
+
+    document.getElementById(
+      "aboutMe"
+    ).textContent =
+      profile.aboutMe || "";
+
+    
+
+    if (profile.createdAt) {
+
+  const createdDate =
+    new Date(profile.createdAt);
+
+  const options = {
+    year: "numeric",
+    month: "long"
+  };
+
+  document.getElementById(
+    "memberSince"
+  ).textContent =
+    "Member since " +
+    createdDate.toLocaleDateString(
+      "en-US",
+      options
+    );
+}
+
+
+
+
+
+
+
+
+document.getElementById(
+  "verifiedBadge"
+).style.display = "flex";
+
+const userId =
+  localStorage.getItem("userId");
+
+const saveProfileBtn =
+  document.getElementById(
+    "saveProfileBtn"
+  );
+
+function updateSaveButton(isSaved) {
+
+  if (isSaved) {
+
+    saveProfileBtn.innerHTML = `
+      <svg width="20" height="20" viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2">
+
+        <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+
+      </svg>
+
+      Saved
+    `;
+
+    saveProfileBtn.classList.add(
+      "saved"
+    );
+
+  } else {
+
+    saveProfileBtn.innerHTML = `
+      <svg width="20" height="20" viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2">
+
+        <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+
+      </svg>
+
+      Save
+    `;
+
+    saveProfileBtn.classList.remove(
+      "saved"
+    );
+
+  }
+
+}
+
+/* Check saved state */
+
+if (userId) {
+
+  fetch(
+    `api/check_saved.php?userId=${userId}&profileId=${profileId}`
+  )
+  .then(res => res.json())
+  .then(data => {
+
+    updateSaveButton(
+      data.saved
+    );
+
+  });
+
+}
+
+/* Save / Unsave */
+
+saveProfileBtn.addEventListener(
+  "click",
+  () => {
+
+    if (!userId) {
+
+      alert(
+        "Please sign in first"
+      );
+
+      return;
+    }
+
+    fetch(
+      "api/save_profile.php",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type":
+            "application/json"
+        },
+        body: JSON.stringify({
+          userId,
+          profileId
+        })
+      }
+    )
+    .then(res => res.json())
+    .then(data => {
+
+      if (data.error) {
+
+        alert(data.error);
+
+        return;
+      }
+
+      updateSaveButton(
+        data.saved
+      );
+
+    });
+
+  }
+);
+
+
+
+    /* Contact Information */
+
+document.getElementById(
+  "phoneNumber"
+).textContent =
+  profile.phone || "Not provided";
+
+const contactBtn =
+  document.getElementById(
+    "contactBtn"
+  );
+
+if (profile.phone) {
+
+  contactBtn.addEventListener(
+    "click",
+    () => {
+
+      window.location.href =
+      `tel:${profile.phone}`;
+
+    }
+  );
+
+}
+
+
+/* WhatsApp */
+
+if (profile.whatsapp) {
+
+  const phone =
+    profile.whatsapp.startsWith("0")
+      ? "213" + profile.whatsapp.substring(1)
+      : profile.whatsapp;
+
+  document.getElementById(
+    "whatsappLink"
+  ).href =
+    `https://wa.me/${phone}`;
+
+    
+
+} else {
+
+  document.getElementById(
+    "whatsappLink"
+  ).style.display =
+    "none";
+
+}
+
+/* Instagram */
+
+if (profile.instagram) {
+
+  const instagramLink =
+    document.getElementById(
+      "instagramLink"
+    );
+
+  instagramLink.href =
+    profile.instagram;
+
+  instagramLink.innerHTML = `
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+    </svg>
+    Instagram
+    `;
+
+} else {
+
+  document.getElementById(
+    "instagramLink"
+  ).style.display =
+    "none";
+}
+
+/* Facebook */
+
+if (profile.facebook) {
+
+  const facebookLink =
+    document.getElementById(
+      "facebookLink"
+    );
+
+  facebookLink.href =
+    profile.facebook;
+
+  facebookLink.innerHTML = `
+    <svg viewBox="0 0 24 24" fill="currentColor">
+      <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+    </svg>
+    Facebook
+    `;
+
+} else {
+
+  document.getElementById(
+    "facebookLink"
+  ).style.display =
+    "none";
+}
+
+/* TikTok */
+
+if (profile.tiktok) {
+
+  const tiktokLink =
+    document.getElementById(
+      "tiktokLink"
+    );
+
+  tiktokLink.href =
+    profile.tiktok;
+
+  tiktokLink.innerHTML = `
+    <svg viewBox="0 0 24 24" fill="currentColor">
+      <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"></path>
+    </svg>
+    TikTok
+    `;
+
+} else {
+
+  document.getElementById(
+    "tiktokLink"
+  ).style.display =
+    "none";
+}
+
+    /* Main Category */
+    
+    document.getElementById(
+      "mainCategory"
+    ).textContent =
+      profile.mainCategory || "";
+    
+    /* Additional Categories */
+    
+    const additionalCategories =
+      JSON.parse(
+        profile.additionalCategories || "[]"
+      );
+    
+    document.getElementById(
+      "additionalCategories"
+    ).innerHTML =
+      additionalCategories
+        .map(category => `
+          <span class="additional-category-tag">
+            ${category}
+          </span>
+        `)
+        .join("");
+
+    if (
+      profile.profilePhoto
+    ) {
+
+      document.getElementById(
+        "profilePhoto"
+      ).src =
+        profile.profilePhoto;
+    }
+
+    if (
+      profile.coverPhoto
+    ) {
+
+      document.getElementById(
+        "coverPhoto"
+      ).src =
+        profile.coverPhoto;
+    }
+
+    /* Services */
+    
+    const servicesContainer =
+      document.getElementById(
+        "servicesContainer"
+      );
+    
+    servicesContainer.innerHTML = "";
+    
+    data.services.forEach(service => {
+    
+      servicesContainer.innerHTML += `
+      
+        <div class="service-item-enhanced">
+    
+          <div class="service-header">
+    
+            <h4>
+              ${service.serviceName}
+            </h4>
+    
+            <span class="service-price">
+              ${service.startingPrice} DA
+            </span>
+    
+          </div>
+    
+          <p class="service-description">
+            ${service.serviceDescription}
+          </p>
+    
+        </div>
+    
+      `;
+    });
+
+    /* Portfolio Photos */
+
+const portfolioGallery =
+  document.getElementById(
+    "portfolioGallery"
+  );
+
+portfolioGallery.innerHTML = "";
+
+portfolioImages = JSON.parse(
+  profile.portfolioPhotos || "[]"
+);
+
+portfolioImages.forEach(
+  (photo, index) => {
+
+    portfolioGallery.innerHTML += `
+
+      <div
+        class="portfolio-item"
+        onclick="openLightbox(${index})">
+
+        <img
+          src="${photo}"
+          alt="Portfolio Work">
+
+      </div>
+
+    `;
+  }
+);
+
+/* Availability */
+
+const availabilityList =
+  document.getElementById(
+    "availabilityList"
+  );
+
+availabilityList.innerHTML = "";
+
+const availability =
+  JSON.parse(
+    profile.availability || "{}"
+  );
+
+const allDays = [
+
+  "sunday",
+  "monday",
+  "tuesday",
+  "wednesday",
+  "thursday",
+  "friday",
+  "saturday"
+
+];
+
+allDays.forEach(day => {
+
+  const hours =
+    availability[day];
+
+  availabilityList.innerHTML += `
+
+    <div class="availability-item">
+
+      <span class="availability-day">
+
+        ${day.charAt(0).toUpperCase() + day.slice(1)}
+
+      </span>
+
+      <span class="availability-hours">
+
+        ${
+          hours
+            ? `${hours.start} - ${hours.end}`
+            : "Closed"
+        }
+
+      </span>
+
+    </div>
+
+  `;
+
+});
+
+/* Emergency Services */
+
+if (
+  profile.emergencyServices == 1
+) {
+
+  document.getElementById(
+    "emergencyBadge"
+  ).style.display =
+    "flex";
+
+}
+
+/* Experience */
+
+const experienceMap = {
+
+  "0-1": "Less than 1 year",
+
+  "1-2": "1-2 years",
+
+  "3-5": "3-5 years",
+
+  "5-10": "5-10 years",
+
+  "10+": "10+ years"
+
+};
+
+document.getElementById(
+  "experienceText"
+).textContent =
+  experienceMap[
+    profile.experience
+  ] || "Not specified";
+
+
+/* Qualifications */
+
+const qualificationsText =
+  document.getElementById(
+    "qualificationsText"
+  );
+
+if (
+  profile.qualifications &&
+  profile.qualifications.trim() !== ""
+) {
+
+  qualificationsText.innerHTML = `
+
+    <h4 style="margin-bottom: 0.5rem;">
+      Qualifications
+    </h4>
+
+    <p>
+      ${profile.qualifications}
+    </p>
+
+  `;
+
+}
+
+/* Qualification Files */
+
+const qualificationFilesContainer =
+  document.getElementById(
+    "qualificationFilesContainer"
+  );
+
+qualificationFilesContainer.innerHTML = "";
+
+const qualificationFiles =
+  JSON.parse(
+    profile.qualificationFiles || "[]"
+  );
+
+if (
+  qualificationFiles.length > 0
+) {
+
+  qualificationFilesContainer.innerHTML += `
+
+    <h4 style="margin-bottom: 1rem;">
+      Certificates & Documents
+    </h4>
+
+  `;
+
+  qualificationFiles.forEach(file => {
+
+    let fileName =
+      file.split("/").pop();
+    
+    fileName = fileName.replace(
+      /^[a-z0-9]+_qualification_/i,
+      ""
+    );
+
+    const icon =
+      file.toLowerCase().endsWith(".pdf")
+        ? "📄"
+        : "🖼️";
+
+    qualificationFilesContainer.innerHTML += `
+
+      <div
+        class="qualification-file">
+
+        <a
+          href="${file}"
+          target="_blank">
+
+          ${icon} ${fileName}
+
+        </a>
+
+      </div>
+
+    `;
+
+  });
+
+}
+
+/* Service Areas */
+
+const serviceAreasContainer =
+  document.getElementById(
+    "serviceAreasContainer"
+  );
+
+serviceAreasContainer.innerHTML = "";
+
+const serviceAreas =
+  JSON.parse(
+    profile.serviceAreas || "[]"
+  );
+
+serviceAreas.forEach(area => {
+
+  serviceAreasContainer.innerHTML += `
+
+    <span class="professional-tag">
+
+      ${area}
+
+    </span>
+
+  `;
+
+});
+
+
+
+  })
+  .catch(error => {
+    console.error(error);
+  });
+
+}
+  
+  </script>
 </body>
 </html>

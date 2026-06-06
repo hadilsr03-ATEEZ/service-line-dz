@@ -307,7 +307,7 @@ function handleLogin(event) {
     if (data.userType === "provider") {
 
       window.location.href =
-        "create-profile.html";
+        "create_profile.html";
 
     } else {
 
@@ -478,21 +478,40 @@ function generateStars(rating) {
 
 /* ============================================
    Smooth Scroll
-   ============================================ */
+============================================ */
+
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+
   anchor.addEventListener('click', function(e) {
-    const href = this.getAttribute('href');
-    if (href === '#') return;
-    
-    e.preventDefault();
-    const target = document.querySelector(href);
-    
+
+    const href =
+      this.getAttribute('href');
+
+    if (
+      !href ||
+      href === '#' ||
+      !href.startsWith('#')
+    ) {
+      return;
+    }
+
+    const target =
+      document.querySelector(href);
+
     if (target) {
-      const offsetTop = target.offsetTop - 80;
+
+      e.preventDefault();
+
+      const offsetTop =
+        target.offsetTop - 80;
+
       window.scrollTo({
         top: offsetTop,
         behavior: 'smooth'
       });
+
     }
+
   });
+
 });

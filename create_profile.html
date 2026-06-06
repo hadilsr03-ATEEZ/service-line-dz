@@ -1,0 +1,2307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Create your professional profile on ServiceLine DZ - Showcase your services to clients across Algeria.">
+  <title>Create Your Profile - ServiceLine DZ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    /* Create Profile Page Specific Styles */
+    .create-profile-page {
+      min-height: 100vh;
+      background: var(--background-alt);
+    }
+
+    .profile-header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      padding: 6rem 0 3rem;
+      color: white;
+    }
+
+    .profile-header .container {
+      text-align: center;
+    }
+
+    .profile-header h1 {
+      color: white;
+      margin-bottom: 0.5rem;
+    }
+
+    .profile-header p {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 1.125rem;
+    }
+
+    .progress-steps {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 2rem;
+    }
+
+    .progress-step {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 100px;
+      font-size: 0.875rem;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .progress-step.active {
+      background: white;
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .progress-step.completed {
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+    }
+
+    .progress-step .step-num {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    .progress-step.active .step-num {
+      background: var(--primary);
+      color: white;
+    }
+
+    .progress-step.completed .step-num {
+      background: var(--success);
+      color: white;
+    }
+
+    .profile-form-container {
+      max-width: 900px;
+      margin: -2rem auto 3rem;
+      padding: 0 1.5rem;
+    }
+
+    .profile-form-card {
+      background: white;
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-xl);
+      overflow: hidden;
+    }
+
+    .form-section {
+      padding: 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .form-section:last-child {
+      border-bottom: none;
+    }
+
+    .form-section-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .form-section-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--background-alt);
+      border-radius: var(--radius-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+    }
+
+    .form-section-title h3 {
+      font-size: 1.125rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .form-section-title p {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    /* Photo Uploads */
+    .photo-uploads {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .photo-upload {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .photo-upload label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      color: var(--text-primary);
+    }
+
+    .upload-area {
+      position: relative;
+      border: 2px dashed var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      text-align: center;
+      cursor: pointer;
+      transition: var(--transition);
+      background: var(--background-alt);
+    }
+
+    .upload-area:hover {
+      border-color: var(--primary);
+      background: rgba(37, 99, 235, 0.05);
+    }
+
+    .upload-area.profile-photo {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    .upload-area.cover-photo {
+      height: 150px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .upload-area input[type="file"] {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .upload-icon {
+      width: 48px;
+      height: 48px;
+      background: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 0.75rem;
+      color: var(--primary);
+      box-shadow: var(--shadow);
+    }
+
+    .upload-area h4 {
+      font-size: 0.875rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .upload-area p {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .upload-preview {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: inherit;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    /* Form Grid */
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    .form-grid.three-col {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .form-grid .full-width {
+      grid-column: 1 / -1;
+    }
+
+    /* Wilaya Dropdown */
+    .wilaya-select {
+      position: relative;
+    }
+
+    /* Service Items */
+    .services-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .service-item {
+      background: var(--background-alt);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      position: relative;
+    }
+
+    .service-item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .service-item-header h4 {
+      font-size: 0.9375rem;
+      color: var(--text-primary);
+    }
+
+    .remove-service {
+      width: 32px;
+      height: 32px;
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      background: white;
+      border: 1px solid var(--border);
+    }
+
+    .remove-service:hover {
+      color: var(--error);
+      border-color: var(--error);
+    }
+
+    .service-item .form-grid {
+      grid-template-columns: 2fr 1fr;
+    }
+
+    .add-service-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 1rem;
+      border: 2px dashed var(--border);
+      border-radius: var(--radius-lg);
+      color: var(--text-secondary);
+      width: 100%;
+      margin-top: 1rem;
+    }
+
+    .add-service-btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      background: rgba(37, 99, 235, 0.05);
+    }
+
+    /* Category Searchable Dropdown */
+    .category-select-wrapper {
+      position: relative;
+      width: 100%;
+    }
+
+    .category-select-trigger {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.875rem 1rem;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: var(--transition);
+      min-height: 48px;
+    }
+
+    .category-select-trigger:hover {
+      border-color: var(--primary);
+    }
+
+    .category-select-trigger:focus,
+    .category-select-trigger.open {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+      outline: none;
+    }
+
+    .category-select-trigger .placeholder {
+      color: var(--text-muted);
+    }
+
+    .category-select-trigger .selected-value {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    .category-select-trigger .chevron {
+      transition: transform 0.2s ease;
+      color: var(--text-muted);
+    }
+
+    .category-select-trigger.open .chevron {
+      transform: rotate(180deg);
+    }
+
+    .category-dropdown {
+      position: absolute;
+      top: calc(100% + 4px);
+      left: 0;
+      right: 0;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-lg);
+      z-index: 100;
+      max-height: 320px;
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+.category-dropdown.open {
+      display: flex;
+    }
+
+    .category-search-input {
+      padding: 0.75rem 1rem;
+      border: none;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.9375rem;
+      outline: none;
+    }
+
+    .category-search-input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .category-options {
+      overflow-y: auto;
+      max-height: 260px;
+    }
+
+    .category-option {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+
+    .category-option:hover {
+      background: var(--background-alt);
+    }
+
+    .category-option.selected {
+      background: rgba(37, 99, 235, 0.08);
+    }
+
+    .category-option.disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .category-option .check-mark {
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--border);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: var(--transition);
+    }
+
+    .category-option.selected .check-mark {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: white;
+    }
+
+    .category-option-label {
+      flex: 1;
+      font-size: 0.9375rem;
+    }
+
+    .no-results {
+      padding: 1rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.875rem;
+    }
+
+    /* Multi-Select with Chips */
+    .multi-select-wrapper {
+      position: relative;
+      width: 100%;
+    }
+
+    .selected-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+      min-height: 0;
+    }
+
+    .selected-chips:empty {
+      display: none;
+    }
+
+    .category-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 0.75rem;
+      background: rgba(37, 99, 235, 0.1);
+      color: var(--primary);
+      border-radius: 100px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      animation: chipIn 0.2s ease;
+    }
+
+    @keyframes chipIn {
+      from {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .category-chip .remove-chip {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--transition);
+      background: transparent;
+      border: none;
+      padding: 0;
+      color: var(--primary);
+    }
+
+    .category-chip .remove-chip:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    .multi-select-trigger {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.875rem 1rem;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: var(--transition);
+      min-height: 48px;
+    }
+
+    .multi-select-trigger:hover {
+      border-color: var(--primary);
+    }
+
+    .multi-select-trigger:focus,
+    .multi-select-trigger.open {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+      outline: none;
+    }
+
+    .multi-select-trigger .placeholder {
+      color: var(--text-muted);
+    }
+
+    .multi-select-trigger .chevron {
+      transition: transform 0.2s ease;
+      color: var(--text-muted);
+    }
+
+    .multi-select-trigger.open .chevron {
+      transform: rotate(180deg);
+    }
+
+    .multi-select-dropdown {
+      position: absolute;
+      top: calc(100% + 4px);
+      left: 0;
+      right: 0;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-lg);
+      z-index: 100;
+      max-height: 320px;
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .multi-select-dropdown.open {
+      display: flex;
+    }
+
+    /* Checkbox style for multi-select */
+    .multi-option .check-mark {
+      border-radius: 4px;
+    }
+
+    /* Availability */
+    .availability-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .day-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem;
+      background: var(--background-alt);
+      border-radius: var(--radius);
+    }
+
+    .day-toggle {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      min-width: 140px;
+    }
+
+    .day-toggle input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--primary);
+    }
+
+    .day-toggle label {
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+
+    .time-inputs {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex: 1;
+    }
+
+    .time-inputs input[type="time"] {
+      padding: 0.5rem 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      font-size: 0.875rem;
+    }
+
+    .time-inputs span {
+      color: var(--text-muted);
+      font-size: 0.875rem;
+    }
+
+    /* Emergency Checkbox */
+    .emergency-option {
+      margin-top: 1.5rem;
+      padding: 1rem 1.25rem;
+      background: linear-gradient(135deg, rgba(239, 68, 68, 0.08) 0%, rgba(239, 68, 68, 0.04) 100%);
+      border: 1px solid rgba(239, 68, 68, 0.2);
+      border-radius: var(--radius-lg);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .emergency-option input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      accent-color: #ef4444;
+    }
+
+    .emergency-option-content h4 {
+      font-size: 0.9375rem;
+      color: #dc2626;
+      margin-bottom: 0.25rem;
+    }
+
+    .emergency-option-content p {
+      font-size: 0.8125rem;
+      color: var(--text-secondary);
+    }
+
+    /* Service Areas */
+    .service-areas-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .service-area-tag {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: rgba(37, 99, 235, 0.1);
+      color: var(--primary);
+      border-radius: 100px;
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+
+    .service-area-tag button {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+    }
+
+    .service-area-tag button:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    .add-area-input {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .add-area-input input {
+      flex: 1;
+    }
+
+    /* Portfolio Section */
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .portfolio-item {
+      position: relative;
+      aspect-ratio: 1;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: var(--background-alt);
+    }
+
+    .portfolio-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .portfolio-item .remove-portfolio {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      width: 28px;
+      height: 28px;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      cursor: pointer;
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .portfolio-item:hover .remove-portfolio {
+      opacity: 1;
+    }
+
+    .portfolio-item .remove-portfolio:hover {
+      background: #ef4444;
+    }
+
+    .add-portfolio-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 1rem;
+      border: 2px dashed var(--border);
+      border-radius: var(--radius-lg);
+      color: var(--text-secondary);
+      cursor: pointer;
+      aspect-ratio: 1;
+      transition: var(--transition);
+    }
+
+    .add-portfolio-btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      background: rgba(37, 99, 235, 0.05);
+    }
+
+    .add-portfolio-btn input[type="file"] {
+      display: none;
+    }
+
+    .add-portfolio-btn svg {
+      width: 32px;
+      height: 32px;
+    }
+
+    .add-portfolio-btn span {
+      font-size: 0.8125rem;
+      font-weight: 500;
+    }
+
+    /* Contact Info Input Group */
+    .contact-input-group {
+      display: flex;
+      align-items: center;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: white;
+    }
+
+    .contact-input-group:focus-within {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+
+    .contact-input-group .input-prefix {
+      padding: 0.75rem 1rem;
+      background: var(--background-alt);
+      color: var(--text-muted);
+      border-right: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .contact-input-group .input-prefix svg {
+      color: var(--text-secondary);
+    }
+
+    .contact-input-group input {
+      flex: 1;
+      padding: 0.75rem 1rem;
+      border: none;
+      outline: none;
+      font-size: 0.9375rem;
+    }
+
+    /* Form Actions */
+    .form-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2rem;
+      background: var(--background-alt);
+      border-top: 1px solid var(--border);
+    }
+
+    .form-actions .btn-lg {
+      min-width: 180px;
+      justify-content: center;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .form-grid.three-col {
+        grid-template-columns: 1fr;
+      }
+
+      .photo-uploads {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .photo-upload {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .progress-steps {
+        flex-wrap: wrap;
+      }
+
+      .day-row {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .time-inputs {
+        width: 100%;
+      }
+
+      .form-actions {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .form-actions .btn-lg {
+        width: 100%;
+      }
+
+      .service-item .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .portfolio-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .certificate-upload {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+  
+    padding: 2rem;
+  
+    border: 2px dashed var(--border);
+    border-radius: var(--radius-lg);
+  
+    cursor: pointer;
+  
+    transition: var(--transition);
+  
+    text-align: center;
+  }
+  
+  .certificate-upload:hover {
+    border-color: var(--primary);
+    background: rgba(37, 99, 235, 0.05);
+  }
+  
+  .certificate-upload input {
+    display: none;
+  }
+  
+  .certificate-upload svg {
+    color: var(--primary);
+  }
+  
+  .certificate-upload span {
+    font-weight: 600;
+  }
+  
+  .certificate-upload small {
+    color: var(--text-secondary);
+  }
+  
+  #qualificationPreview {
+    margin-top: 1rem;
+  }
+  </style>
+</head>
+<body>
+  <div class="create-profile-page">
+    <!-- Navigation -->
+    <nav class="navbar">
+      <div class="container">
+        <a href="index.html" class="logo">
+          <div class="logo-icon">SL</div>
+          ServiceLine<span>DZ</span>
+        </a>
+        <div class="nav-buttons">
+          <a href="login.html" class="btn btn-ghost">Sign In</a>
+          <a href="register.html" class="btn btn-primary">Get Started</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="profile-header">
+      <div class="container">
+        <h1>Create Your Professional Profile</h1>
+        <p>Showcase your services and start receiving clients across Algeria</p>
+        <div class="progress-steps">
+          <div class="progress-step completed">
+            <span class="step-num">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </span>
+            Account Created
+          </div>
+          <div class="progress-step active">
+            <span class="step-num">2</span>
+            Profile Setup
+          </div>
+          <div class="progress-step">
+            <span class="step-num">3</span>
+            Verification
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Profile Form -->
+    <div class="profile-form-container">
+      <form id="profileForm" class="profile-form-card" enctype="multipart/form-data" onsubmit="handleProfileSubmit(event)">
+        
+        <!-- Photo Upload Section -->
+        <div class="form-section">
+          <div class="form-section-header">
+            <div class="form-section-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                <polyline points="21 15 16 10 5 21"></polyline>
+              </svg>
+            </div>
+            <div class="form-section-title">
+              <h3>Profile Photos</h3>
+              <p>Upload a professional photo and cover image to make your profile stand out</p>
+            </div>
+          </div>
+          <div class="photo-uploads">
+            <div class="photo-upload">
+              <label>Profile Photo</label>
+              <div class="upload-area profile-photo" id="profilePhotoArea">
+                  <input
+                      type="file"
+                      name="profilePhoto"
+                      accept="image/*"
+                      id="profilePhoto"
+                      onchange="previewImage(this, 'profilePhotoPreview')">
+              
+                  <img id="profilePhotoPreview" class="upload-preview" style="display: none;">
+              
+                  <div class="upload-content">
+                      <div class="upload-icon">
+                          <!-- svg -->
+                      </div>
+                      <h4>Upload Photo</h4>
+                      <p>JPG, PNG (max 5MB)</p>
+                  </div>
+              </div>
+            </div>
+            <div class="photo-upload" style="flex: 2;">
+              <label>Cover Photo</label>
+              <div class="upload-area cover-photo" id="coverPhotoArea">
+                  <input
+                      type="file"
+                      name="coverPhoto"
+                      accept="image/*"
+                      id="coverPhoto"
+                      onchange="previewImage(this, 'coverPhotoPreview')">
+              
+                  <img id="coverPhotoPreview" class="upload-preview" style="display: none;">
+              
+                  <div class="upload-content">
+                      <div class="upload-icon">
+                          <!-- svg -->
+                      </div>
+                      <h4>Upload Cover Image</h4>
+                      <p>Recommended size: 1200 x 300 pixels</p>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Basic Information Section -->
+        <div class="form-section">
+          <div class="form-section-header">
+            <div class="form-section-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+            </div>
+            <div class="form-section-title">
+              <h3>Basic Information</h3>
+              <p>Tell clients about yourself and what you do</p>
+            </div>
+          </div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="fullName">Full Name *</label>
+              <input type="text" id="fullName" name="fullName" class="form-control" placeholder="Your full name" required>
+            </div>
+            <div class="form-group">
+              <label for="profession">Profession / Job Title *</label>
+              <input type="text" id="profession" name="profession" class="form-control" placeholder="e.g., Plumber, Electrician, Web Developer" required>
+            </div>
+            <div class="form-group full-width">
+              <label for="aboutMe">About Me *</label>
+              <textarea id="aboutMe" name="aboutMe" class="form-control" rows="4" placeholder="Describe your expertise, experience, and what makes you unique. This helps clients understand your value proposition." required></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Information Section -->
+        <div class="form-section">
+          <div class="form-section-header">
+            <div class="form-section-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+              </svg>
+            </div>
+            <div class="form-section-title">
+              <h3>Contact Information</h3>
+              <p>How clients can reach you</p>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone Number *</label>
+          
+            <div class="contact-input-group">
+          
+              <span class="input-prefix">
+          
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2">
+          
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2
+                  19.79 19.79 0 0 1-8.63-3.07
+                  19.5 19.5 0 0 1-6-6
+                  19.79 19.79 0 0 1-3.07-8.67
+                  A2 2 0 0 1 4.11 2h3
+                  a2 2 0 0 1 2 1.72
+                  c.12.81.33 1.6.61 2.35
+                  a2 2 0 0 1-.45 2.11L8.09 9.91
+                  a16 16 0 0 0 6 6l1.73-1.18
+                  a2 2 0 0 1 2.11-.45
+                  c.75.28 1.54.49 2.35.61
+                  A2 2 0 0 1 22 16.92z"></path>
+          
+                </svg>
+          
+                +213
+          
+              </span>
+          
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                placeholder="555 12 34 56"
+                required>
+          
+            </div>
+          </div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="whatsapp">WhatsApp Number (optional)</label>
+              <div class="contact-input-group">
+                <span class="input-prefix">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                  </svg>
+                  +213
+                </span>
+                <input type="tel" id="whatsapp" name="whatsapp" placeholder="555 12 34 56">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="instagram">Instagram (optional)</label>
+              <div class="contact-input-group">
+                <span class="input-prefix">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                  </svg>
+                  @
+                </span>
+                <input type="text" id="instagram" name="instagram" placeholder="https://www.instagram.com/yourprofile">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="facebook">Facebook (optional)</label>
+              <div class="contact-input-group">
+                <span class="input-prefix">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                  </svg>
+                </span>
+                <input type="text" id="facebook" name="facebook" placeholder="https://www.facebook.com/yourprofile">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="tiktok">TikTok (optional)</label>
+              <div class="contact-input-group">
+                <span class="input-prefix">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+                  </svg>
+                  @
+                </span>
+                <input type="text" id="tiktok" name="tiktok" placeholder="https://www.tiktok.com/@yourprofile">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Location Section -->
+        <div class="form-section">
+          <div class="form-section-header">
+            <div class="form-section-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+            </div>
+            <div class="form-section-title">
+              <h3>Location</h3>
+              <p>Where are you based?</p>
+            </div>
+          </div>
+          <div class="form-grid three-col">
+            <div class="form-group">
+              <label for="wilaya">Wilaya *</label>
+              <select id="wilaya" name="wilaya" class="form-control" required>
+                <option value="">Select Wilaya</option>
+                <option value="01">01 - Adrar</option>
+                <option value="02">02 - Chlef</option>
+                <option value="03">03 - Laghouat</option>
+                <option value="04">04 - Oum El Bouaghi</option>
+                <option value="05">05 - Batna</option>
+                <option value="06">06 - Bejaia</option>
+                <option value="07">07 - Biskra</option>
+                <option value="08">08 - Bechar</option>
+                <option value="09">09 - Blida</option>
+                <option value="10">10 - Bouira</option>
+                <option value="11">11 - Tamanrasset</option>
+                <option value="12">12 - Tebessa</option>
+                <option value="13">13 - Tlemcen</option>
+                <option value="14">14 - Tiaret</option>
+                <option value="15">15 - Tizi Ouzou</option>
+                <option value="16">16 - Alger</option>
+                <option value="17">17 - Djelfa</option>
+                <option value="18">18 - Jijel</option>
+                <option value="19">19 - Setif</option>
+                <option value="20">20 - Saida</option>
+                <option value="21">21 - Skikda</option>
+                <option value="22">22 - Sidi Bel Abbes</option>
+                <option value="23">23 - Annaba</option>
+                <option value="24">24 - Guelma</option>
+                <option value="25">25 - Constantine</option>
+                <option value="26">26 - Medea</option>
+                <option value="27">27 - Mostaganem</option>
+                <option value="28">28 - M'Sila</option>
+                <option value="29">29 - Mascara</option>
+                <option value="30">30 - Ouargla</option>
+                <option value="31">31 - Oran</option>
+                <option value="32">32 - El Bayadh</option>
+                <option value="33">33 - Illizi</option>
+                <option value="34">34 - Bordj Bou Arreridj</option>
+                <option value="35">35 - Boumerdes</option>
+                <option value="36">36 - El Tarf</option>
+                <option value="37">37 - Tindouf</option>
+                <option value="38">38 - Tissemsilt</option>
+                <option value="39">39 - El Oued</option>
+                <option value="40">40 - Khenchela</option>
+                <option value="41">41 - Souk Ahras</option>
+                <option value="42">42 - Tipaza</option>
+                <option value="43">43 - Mila</option>
+                <option value="44">44 - Ain Defla</option>
+                <option value="45">45 - Naama</option>
+                <option value="46">46 - Ain Temouchent</option>
+                <option value="47">47 - Ghardaia</option>
+                <option value="48">48 - Relizane</option>
+                <option value="49">49 - El M'Ghair</option>
+                <option value="50">50 - El Meniaa</option>
+                <option value="51">51 - Ouled Djellal</option>
+                <option value="52">52 - Bordj Badji Mokhtar</option>
+                <option value="53">53 - Beni Abbes</option>
+                <option value="54">54 - Timimoun</option>
+                <option value="55">55 - Touggourt</option>
+                <option value="56">56 - Djanet</option>
+                <option value="57">57 - In Salah</option>
+                <option value="58">58 - In Guezzam</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="commune">Commune *</label>
+              <input type="text" id="commune" name="commune" class="form-control" placeholder="Enter your commune" required>
+            </div>
+            <div class="form-group">
+              <label for="experience">Years of Experience *</label>
+              <select id="experience" name="experience" class="form-control" required>
+                <option value="">Select experience</option>
+                <option value="0-1">Less than 1 year</option>
+                <option value="1-2">1-2 years</option>
+                <option value="3-5">3-5 years</option>
+                <option value="5-10">5-10 years</option>
+                <option value="10+">10+ years</option>
+              </select>
+            </div>
+
+            <div class="form-group full-width">
+
+  <label for="qualifications">
+    Professional Qualifications *
+  </label>
+
+  <textarea id="qualifications" name="qualifications" class="form-control" rows="4" placeholder="Bachelor Degree, Professional Certificates, Training Courses, Licenses, Certifications..."></textarea>
+
+</div>
+
+<div class="form-group full-width">
+
+  <label>
+    Diplomas & Certificates (Optional)
+  </label>
+
+  <label class="certificate-upload">
+
+    <input
+      type="file"
+      name="qualificationFiles[]"
+      multiple
+      accept=".pdf,.jpg,.jpeg,.png"
+      onchange="addQualificationFiles(this)">
+
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+      <polyline points="7 10 12 15 17 10"></polyline>
+      <line x1="12" y1="15" x2="12" y2="3"></line>
+    </svg>
+
+    <span>Upload diplomas and certificates</span>
+
+    <small>
+      PDF, JPG, PNG • Multiple files allowed
+    </small>
+
+  </label>
+
+  <div id="qualificationPreview"></div>
+
+</div>
+          </div>
+        </div>
+
+        <!-- Service Categories Section -->
+        <div class="form-section">
+          <div class="form-section-header">
+            <div class="form-section-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                <polyline points="2 17 12 22 22 17"></polyline>
+                <polyline points="2 12 12 17 22 12"></polyline>
+              </svg>
+            </div>
+            <div class="form-section-title">
+              <h3>Service Categories</h3>
+              <p>Select your main category and additional categories</p>
+            </div>
+          </div>
+          
+          <!-- Main Category - Searchable Single Select -->
+          <div style="margin-bottom: 2rem;">
+            <label style="display: block; font-weight: 600; margin-bottom: 0.5rem; color: var(--text-primary);">Main Category *</label>
+            <p style="font-size: 0.875rem; color: var(--text-muted); margin-bottom: 0.75rem;">This will be your primary service category</p>
+            <div class="category-select-wrapper" id="mainCategoryWrapper">
+              <input type="hidden" name="mainCategory" id="mainCategoryInput" required>
+              <div class="category-select-trigger" id="mainCategoryTrigger" tabindex="0" onclick="toggleMainCategoryDropdown()">
+                <span class="placeholder" id="mainCategoryPlaceholder">Search and select a category...</span>
+                <span class="selected-value" id="mainCategoryValue" style="display: none;"></span>
+                <svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </div>
+              <div class="category-dropdown" id="mainCategoryDropdown">
+                <input type="text" class="category-search-input" id="mainCategorySearch" placeholder="Search categories..." oninput="filterMainCategories()">
+                <div class="category-options" id="mainCategoryOptions">
+                  <!-- Options will be populated by JavaScript -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Additional Categories - Searchable Multi-Select with Chips -->
+          <div>
+            <label style="display: block; font-weight: 600; margin-bottom: 0.5rem; color: var(--text-primary);">Additional Categories (optional)</label>
+            <p style="font-size: 0.875rem; color: var(--text-muted); margin-bottom: 0.75rem;">Select any additional services you offer</p>
+            <div class="selected-chips" id="additionalCategoryChips">
+              <!-- Selected chips will be added here dynamically -->
+            </div>
+            <div class="multi-select-wrapper" id="additionalCategoryWrapper">
+              <div class="multi-select-trigger" id="additionalCategoryTrigger" tabindex="0" onclick="toggleAdditionalCategoryDropdown()">
+                <span class="placeholder">Search and add categories...</span>
+                <svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </div>
+              <div class="multi-select-dropdown" id="additionalCategoryDropdown">
+                <input type="text" class="category-search-input" id="additionalCategorySearch" placeholder="Search categories..." oninput="filterAdditionalCategories()">
+                <div class="category-options" id="additionalCategoryOptions">
+                  <!-- Options will be populated by JavaScript -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Services Offered Section -->
+        <div class="form-section">
+          <div class="form-section-header">
+            <div class="form-section-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
+              </svg>
+            </div>
+            <div class="form-section-title">
+              <h3>Services Offered</h3>
+              <p>List the specific services you provide with descriptions and prices</p>
+            </div>
+          </div>
+          <div class="services-list" id="servicesList">
+            <div class="service-item">
+              <div class="service-item-header">
+                <h4>Service 1</h4>
+                <button type="button" class="remove-service" onclick="removeService(this)" style="display: none;">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                  </svg>
+                </button>
+              </div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label>Service Name *</label>
+                  <input type="text" name="serviceName[]" class="form-control" placeholder="e.g., Pipe Repair, Website Design" required>
+                </div>
+                <div class="form-group">
+                  <label>Starting Price (DZD) *</label>
+                  <input type="number" name="servicePrice[]" class="form-control" placeholder="e.g., 2000" required>
+                </div>
+                <div class="form-group full-width">
+                  <label>Description *</label>
+                  <textarea name="serviceDescription[]" class="form-control" rows="2" placeholder="Describe what this service includes, what the client can expect, and any important details" required></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button type="button" class="add-service-btn" onclick="addService()">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+            Add Another Service
+          </button>
+        </div>
+
+        <!-- Portfolio / Previous Work Section -->
+        <div class="form-section">
+          <div class="form-section-header">
+            <div class="form-section-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                <polyline points="21 15 16 10 5 21"></polyline>
+              </svg>
+            </div>
+            <div class="form-section-title">
+              <h3>Portfolio / Previous Work</h3>
+              <p>Showcase your best work to attract more clients</p>
+            </div>
+          </div>
+          <div class="portfolio-grid" id="portfolioGrid">
+            <!-- Portfolio items will be added here -->
+            <label class="add-portfolio-btn">
+              <input
+                  type="file"
+                  name="portfolioPhotos[]"
+                  accept="image/*"
+                  multiple
+                  onchange="addPortfolioImages(this)">              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+              <span>Add Photos</span>
+            </label>
+          </div>
+          <p style="font-size: 0.8125rem; color: var(--text-muted);">Upload up to 10 photos of your previous work. Supported formats: JPG, PNG (max 5MB each)</p>
+        </div>
+
+        <!-- Availability Section -->
+        <div class="form-section">
+          <div class="form-section-header">
+            <div class="form-section-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+            </div>
+            <div class="form-section-title">
+              <h3>Availability</h3>
+              <p>Set your working days and hours</p>
+            </div>
+          </div>
+          <div class="availability-grid">
+            <div class="day-row">
+              <div class="day-toggle">
+                <input type="checkbox" id="sunday" name="days[]" value="sunday">
+                <label for="sunday">Sunday</label>
+              </div>
+              <div class="time-inputs">
+                <input type="time" name="sunday_start" value="08:00">
+                <span>to</span>
+                <input type="time" name="sunday_end" value="17:00">
+              </div>
+            </div>
+            <div class="day-row">
+              <div class="day-toggle">
+                <input type="checkbox" id="monday" name="days[]" value="monday" checked>
+                <label for="monday">Monday</label>
+              </div>
+              <div class="time-inputs">
+                <input type="time" name="monday_start" value="08:00">
+                <span>to</span>
+                <input type="time" name="monday_end" value="17:00">
+              </div>
+            </div>
+            <div class="day-row">
+              <div class="day-toggle">
+                <input type="checkbox" id="tuesday" name="days[]" value="tuesday" checked>
+                <label for="tuesday">Tuesday</label>
+              </div>
+              <div class="time-inputs">
+                <input type="time" name="tuesday_start" value="08:00">
+                <span>to</span>
+                <input type="time" name="tuesday_end" value="17:00">
+              </div>
+            </div>
+            <div class="day-row">
+              <div class="day-toggle">
+                <input type="checkbox" id="wednesday" name="days[]" value="wednesday" checked>
+                <label for="wednesday">Wednesday</label>
+              </div>
+              <div class="time-inputs">
+                <input type="time" name="wednesday_start" value="08:00">
+                <span>to</span>
+                <input type="time" name="wednesday_end" value="17:00">
+              </div>
+            </div>
+            <div class="day-row">
+              <div class="day-toggle">
+                <input type="checkbox" id="thursday" name="days[]" value="thursday" checked>
+                <label for="thursday">Thursday</label>
+              </div>
+              <div class="time-inputs">
+                <input type="time" name="thursday_start" value="08:00">
+                <span>to</span>
+                <input type="time" name="thursday_end" value="17:00">
+              </div>
+            </div>
+            <div class="day-row">
+              <div class="day-toggle">
+                <input type="checkbox" id="friday" name="days[]" value="friday">
+                <label for="friday">Friday</label>
+              </div>
+              <div class="time-inputs">
+                <input type="time" name="friday_start" value="08:00">
+                <span>to</span>
+                <input type="time" name="friday_end" value="17:00">
+              </div>
+            </div>
+            <div class="day-row">
+              <div class="day-toggle">
+                <input type="checkbox" id="saturday" name="days[]" value="saturday">
+                <label for="saturday">Saturday</label>
+              </div>
+              <div class="time-inputs">
+                <input type="time" name="saturday_start" value="08:00">
+                <span>to</span>
+                <input type="time" name="saturday_end" value="12:00">
+              </div>
+            </div>
+          </div>
+
+          <!-- Emergency Services Option -->
+          <div class="emergency-option">
+            <input type="checkbox" id="emergencyServices" name="emergencyServices" value="yes">
+            <div class="emergency-option-content">
+              <h4>Available for Emergency Jobs</h4>
+              <p>Check this if you can respond to urgent service requests outside of regular hours</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Service Areas Section -->
+        <div class="form-section">
+          <div class="form-section-header">
+            <div class="form-section-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="2" y1="12" x2="22" y2="12"></line>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+              </svg>
+            </div>
+            <div class="form-section-title">
+              <h3>Service Areas</h3>
+              <p>Add the locations where you can provide your services</p>
+            </div>
+          </div>
+          <div class="service-areas-list" id="serviceAreasList">
+            <!-- Service area tags will be added here -->
+          </div>
+          <div class="add-area-input">
+            <input type="text" id="newServiceArea" class="form-control" placeholder="Enter a location (e.g., Bab El Oued, Hussein Dey)">
+            <button type="button" class="btn btn-secondary" onclick="addServiceArea()">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+              Add Area
+            </button>
+          </div>
+        </div>
+
+        <!-- Form Actions -->
+        <div class="form-actions">
+          <button type="button" class="btn btn-ghost" onclick="saveDraft()">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+              <polyline points="17 21 17 13 7 13 7 21"></polyline>
+              <polyline points="7 3 7 8 15 8"></polyline>
+            </svg>
+            Save as Draft
+          </button>
+          <button type="submit" class="btn btn-primary btn-lg">
+            Save Profile
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer" style="padding: 2rem 0;">
+      <div class="container">
+        <div class="footer-bottom" style="padding-top: 0; border-top: none;">
+          <p>&copy; 2024 ServiceLine DZ. All rights reserved.</p>
+          <div class="footer-bottom-links">
+            <a href="#">Terms of Service</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Help Center</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+<script src="js/main.js"></script>
+  <script>
+    // Image preview functionality
+    function previewImage(input, previewId) {
+      const preview = document.getElementById(previewId);
+      const uploadContent = input.parentElement.querySelector('.upload-content');
+      
+      if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        
+        reader.onload = function(e) {
+          preview.src = e.target.result;
+          preview.style.display = 'block';
+          if (uploadContent) {
+            uploadContent.style.display = 'none';
+          }
+        }
+        
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+
+    // Categories data with expanded list
+    const allCategories = [
+      { value: 'plumbing', label: 'Plumbing' },
+      { value: 'electrical', label: 'Electrical' },
+      { value: 'cleaning', label: 'Cleaning' },
+      { value: 'carpentry', label: 'Carpentry' },
+      { value: 'painting', label: 'Painting' },
+      { value: 'hvac', label: 'HVAC / Air Conditioning' },
+      { value: 'landscaping', label: 'Landscaping & Gardening' },
+      { value: 'moving', label: 'Moving & Transportation' },
+      { value: 'web-development', label: 'Web Development' },
+      { value: 'graphic-design', label: 'Graphic Design' },
+      { value: 'photography', label: 'Photography & Videography' },
+      { value: 'tutoring', label: 'Tutoring & Education' },
+      { value: 'appliance-repair', label: 'Appliance Repair' },
+      { value: 'roofing', label: 'Roofing' },
+      { value: 'flooring', label: 'Flooring' },
+      { value: 'masonry', label: 'Masonry & Tiling' },
+      { value: 'welding', label: 'Welding & Metalwork' },
+      { value: 'security', label: 'Security Systems' },
+      { value: 'pest-control', label: 'Pest Control' },
+      { value: 'catering', label: 'Catering & Food Services' },
+      { value: 'event-planning', label: 'Event Planning' },
+      { value: 'automotive', label: 'Automotive Repair' },
+      { value: 'tailoring', label: 'Tailoring & Alterations' },
+      { value: 'beauty', label: 'Beauty & Wellness' },
+      { value: 'fitness', label: 'Fitness & Personal Training' },
+      { value: 'translation', label: 'Translation Services' },
+      { value: 'accounting', label: 'Accounting & Bookkeeping' },
+      { value: 'legal', label: 'Legal Services' },
+      { value: 'marketing', label: 'Marketing & Advertising' },
+      { value: 'it-support', label: 'IT Support' },
+      { value: 'mobile-repair', label: 'Mobile Phone Repair' },
+      { value: 'furniture', label: 'Furniture Assembly' },
+      { value: 'locksmith', label: 'Locksmith Services' },
+      { value: 'window-cleaning', label: 'Window Cleaning' },
+      { value: 'pool-maintenance', label: 'Pool Maintenance' },
+      { value: 'solar-installation', label: 'Solar Panel Installation' },
+      { value: 'home-automation', label: 'Home Automation' },
+      { value: 'interior-design', label: 'Interior Design' },
+      { value: 'music-lessons', label: 'Music Lessons' },
+      { value: 'driving-lessons', label: 'Driving Lessons' }
+    ];
+
+    // State
+    let selectedMainCategory = null;
+    let selectedAdditionalCategories = [];
+
+    // Initialize dropdowns on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      renderMainCategoryOptions();
+      renderAdditionalCategoryOptions();
+      
+      // Close dropdowns when clicking outside
+      document.addEventListener('click', function(e) {
+        if (!e.target.closest('#mainCategoryWrapper')) {
+          closeMainCategoryDropdown();
+        }
+        if (!e.target.closest('#additionalCategoryWrapper')) {
+          closeAdditionalCategoryDropdown();
+        }
+      });
+    });
+
+    // ========== MAIN CATEGORY (Single Select) ==========
+    function toggleMainCategoryDropdown() {
+      const dropdown = document.getElementById('mainCategoryDropdown');
+      const trigger = document.getElementById('mainCategoryTrigger');
+      const isOpen = dropdown.classList.contains('open');
+      
+      if (isOpen) {
+        closeMainCategoryDropdown();
+      } else {
+        dropdown.classList.add('open');
+        trigger.classList.add('open');
+        document.getElementById('mainCategorySearch').focus();
+      }
+    }
+
+    function closeMainCategoryDropdown() {
+      const dropdown = document.getElementById('mainCategoryDropdown');
+      const trigger = document.getElementById('mainCategoryTrigger');
+      dropdown.classList.remove('open');
+      trigger.classList.remove('open');
+      document.getElementById('mainCategorySearch').value = '';
+      renderMainCategoryOptions();
+    }
+
+    function renderMainCategoryOptions(filter = '') {
+      const container = document.getElementById('mainCategoryOptions');
+      const filterLower = filter.toLowerCase();
+      
+      const filteredCategories = allCategories.filter(cat => 
+        cat.label.toLowerCase().includes(filterLower)
+      );
+      
+      if (filteredCategories.length === 0) {
+        container.innerHTML = '<div class="no-results">No categories found</div>';
+        return;
+      }
+      
+      container.innerHTML = filteredCategories.map(cat => {
+        const isSelected = selectedMainCategory === cat.value;
+        return `
+          <div class="category-option ${isSelected ? 'selected' : ''}" onclick="selectMainCategory('${cat.value}')">
+            <span class="check-mark">
+              ${isSelected ? '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>' : ''}
+            </span>
+            <span class="category-option-label">${cat.label}</span>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function filterMainCategories() {
+      const searchValue = document.getElementById('mainCategorySearch').value;
+      renderMainCategoryOptions(searchValue);
+    }
+
+    function selectMainCategory(value) {
+      const category = allCategories.find(cat => cat.value === value);
+      if (!category) return;
+      
+      selectedMainCategory = value;
+      
+      // Update hidden input
+      document.getElementById('mainCategoryInput').value = value;
+      
+      // Update trigger display
+      document.getElementById('mainCategoryPlaceholder').style.display = 'none';
+      const valueEl = document.getElementById('mainCategoryValue');
+      valueEl.style.display = 'flex';
+      valueEl.innerHTML = `
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+        ${category.label}
+      `;
+      
+      closeMainCategoryDropdown();
+      
+      // Remove from additional categories if selected there
+      if (selectedAdditionalCategories.includes(value)) {
+        removeAdditionalCategory(value);
+      }
+      
+      // Re-render additional options to disable this category
+      renderAdditionalCategoryOptions();
+    }
+
+    // ========== ADDITIONAL CATEGORIES (Multi-Select with Chips) ==========
+    function toggleAdditionalCategoryDropdown() {
+      const dropdown = document.getElementById('additionalCategoryDropdown');
+      const trigger = document.getElementById('additionalCategoryTrigger');
+      const isOpen = dropdown.classList.contains('open');
+      
+      if (isOpen) {
+        closeAdditionalCategoryDropdown();
+      } else {
+        dropdown.classList.add('open');
+        trigger.classList.add('open');
+        document.getElementById('additionalCategorySearch').focus();
+      }
+    }
+
+    function closeAdditionalCategoryDropdown() {
+      const dropdown = document.getElementById('additionalCategoryDropdown');
+      const trigger = document.getElementById('additionalCategoryTrigger');
+      dropdown.classList.remove('open');
+      trigger.classList.remove('open');
+      document.getElementById('additionalCategorySearch').value = '';
+      renderAdditionalCategoryOptions();
+    }
+
+    function renderAdditionalCategoryOptions(filter = '') {
+      const container = document.getElementById('additionalCategoryOptions');
+      const filterLower = filter.toLowerCase();
+      
+      const filteredCategories = allCategories.filter(cat => 
+        cat.label.toLowerCase().includes(filterLower)
+      );
+      
+      if (filteredCategories.length === 0) {
+        container.innerHTML = '<div class="no-results">No categories found</div>';
+        return;
+      }
+      
+      container.innerHTML = filteredCategories.map(cat => {
+        const isSelected = selectedAdditionalCategories.includes(cat.value);
+        const isDisabled = selectedMainCategory === cat.value;
+        
+        return `
+          <div class="category-option multi-option ${isSelected ? 'selected' : ''} ${isDisabled ? 'disabled' : ''}" 
+               onclick="${isDisabled ? '' : `toggleAdditionalCategory('${cat.value}')`}">
+            <span class="check-mark">
+              ${isSelected ? '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>' : ''}
+            </span>
+            <span class="category-option-label">${cat.label}${isDisabled ? ' (Main category)' : ''}</span>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function filterAdditionalCategories() {
+      const searchValue = document.getElementById('additionalCategorySearch').value;
+      renderAdditionalCategoryOptions(searchValue);
+    }
+
+    function toggleAdditionalCategory(value) {
+      if (selectedMainCategory === value) return;
+      
+      const index = selectedAdditionalCategories.indexOf(value);
+      if (index === -1) {
+        selectedAdditionalCategories.push(value);
+      } else {
+        selectedAdditionalCategories.splice(index, 1);
+      }
+      
+      renderAdditionalCategoryChips();
+      renderAdditionalCategoryOptions(document.getElementById('additionalCategorySearch').value);
+    }
+
+    function removeAdditionalCategory(value) {
+      const index = selectedAdditionalCategories.indexOf(value);
+      if (index !== -1) {
+        selectedAdditionalCategories.splice(index, 1);
+        renderAdditionalCategoryChips();
+        renderAdditionalCategoryOptions();
+      }
+    }
+
+    function renderAdditionalCategoryChips() {
+      const container = document.getElementById('additionalCategoryChips');
+      
+      // Remove existing hidden inputs
+      container.querySelectorAll('input[name="additionalCategories"]').forEach(el => el.remove());
+      
+      if (selectedAdditionalCategories.length === 0) {
+        container.innerHTML = '';
+        return;
+      }
+      
+      container.innerHTML = selectedAdditionalCategories.map(value => {
+        const category = allCategories.find(cat => cat.value === value);
+        return `
+          <span class="category-chip">
+            ${category.label}
+            <button type="button" class="remove-chip" onclick="removeAdditionalCategory('${value}')">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+            <input type="hidden" name="additionalCategories" value="${value}">
+          </span>
+        `;
+      }).join('');
+    }
+
+    // Service management
+    let serviceCount = 1;
+
+    function addService() {
+      serviceCount++;
+      const servicesList = document.getElementById('servicesList');
+      const serviceItem = document.createElement('div');
+      serviceItem.className = 'service-item';
+      serviceItem.innerHTML = `
+        <div class="service-item-header">
+          <h4>Service ${serviceCount}</h4>
+          <button type="button" class="remove-service" onclick="removeService(this)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Service Name *</label>
+            <input type="text" name="serviceName[]" class="form-control" placeholder="e.g., Pipe Repair, Website Design" required>
+          </div>
+          <div class="form-group">
+            <label>Starting Price (DZD) *</label>
+            <input type="number" name="servicePrice[]" class="form-control" placeholder="e.g., 2000" required>
+          </div>
+          <div class="form-group full-width">
+            <label>Description *</label>
+            <textarea name="serviceDescription[]" class="form-control" rows="2" placeholder="Describe what this service includes, what the client can expect, and any important details" required></textarea>
+          </div>
+        </div>
+      `;
+      servicesList.appendChild(serviceItem);
+      
+      // Show remove button on first service if more than one
+      if (serviceCount > 1) {
+        const firstRemoveBtn = servicesList.querySelector('.service-item:first-child .remove-service');
+        if (firstRemoveBtn) {
+          firstRemoveBtn.style.display = 'flex';
+        }
+      }
+    }
+
+    function removeService(button) {
+      const serviceItem = button.closest('.service-item');
+      serviceItem.remove();
+      updateServiceNumbers();
+    }
+
+    function updateServiceNumbers() {
+      const serviceItems = document.querySelectorAll('.service-item');
+      serviceCount = serviceItems.length;
+      
+      serviceItems.forEach((item, index) => {
+        item.querySelector('h4').textContent = `Service ${index + 1}`;
+      });
+      
+      // Hide remove button if only one service
+      if (serviceCount === 1) {
+        const removeBtn = serviceItems[0].querySelector('.remove-service');
+        if (removeBtn) {
+          removeBtn.style.display = 'none';
+        }
+      }
+    }
+
+    // Portfolio management
+    const portfolioImages = [];
+    const MAX_PORTFOLIO_IMAGES = 10;
+
+    function addPortfolioImages(input) {
+      if (input.files) {
+        const files = Array.from(input.files);
+        const remainingSlots = MAX_PORTFOLIO_IMAGES - portfolioImages.length;
+        const filesToAdd = files.slice(0, remainingSlots);
+        
+        filesToAdd.forEach(file => {
+          const reader = new FileReader();
+          reader.onload = function(e) {
+            portfolioImages.push({
+              file: file,
+              dataUrl: e.target.result
+            });
+            renderPortfolio();
+          };
+          reader.readAsDataURL(file);
+        });
+        
+        if (files.length > remainingSlots) {
+          alert(`You can only upload up to ${MAX_PORTFOLIO_IMAGES} photos. ${files.length - remainingSlots} photos were not added.`);
+        }
+      }
+      input.value = ''; // Reset input
+    }
+
+    function removePortfolioImage(index) {
+      portfolioImages.splice(index, 1);
+      renderPortfolio();
+    }
+
+    function renderPortfolio() {
+      const grid = document.getElementById('portfolioGrid');
+      const addButton = grid.querySelector('.add-portfolio-btn');
+      
+      // Remove all portfolio items except the add button
+      const items = grid.querySelectorAll('.portfolio-item');
+      items.forEach(item => item.remove());
+      
+      // Add portfolio items
+      portfolioImages.forEach((img, index) => {
+        const item = document.createElement('div');
+        item.className = 'portfolio-item';
+        item.innerHTML = `
+          <img src="${img.dataUrl}" alt="Portfolio work ${index + 1}">
+          <button type="button" class="remove-portfolio" onclick="removePortfolioImage(${index})">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        `;
+        grid.insertBefore(item, addButton);
+      });
+      
+      // Hide add button if max reached
+      if (portfolioImages.length >= MAX_PORTFOLIO_IMAGES) {
+        addButton.style.display = 'none';
+      } else {
+        addButton.style.display = 'flex';
+      }
+    }
+
+    // Qualifications management
+
+let qualificationFiles = [];
+
+function addQualificationFiles(input) {
+
+    if (input.files) {
+
+        const files = Array.from(input.files);
+
+        files.forEach(file => {
+
+            qualificationFiles.push(file);
+
+        });
+
+        renderQualificationFiles();
+    }
+
+    input.value = "";
+}
+
+function removeQualificationFile(index) {
+
+    qualificationFiles.splice(index, 1);
+
+    renderQualificationFiles();
+}
+
+function renderQualificationFiles() {
+
+    const container =
+        document.getElementById(
+            "qualificationPreview"
+        );
+
+    if (!container) return;
+
+    container.innerHTML = "";
+
+    qualificationFiles.forEach(
+        (file, index) => {
+
+            const item =
+                document.createElement("div");
+
+            item.className =
+                "qualification-file";
+
+            const icon =
+                file.type.startsWith("image/")
+                    ? "🖼"
+                    : "📄";
+
+            item.innerHTML = `
+                <span>
+                    ${icon} ${file.name}
+                </span>
+
+                <button
+                    type="button"
+                    onclick="removeQualificationFile(${index})">
+                    ✕
+                </button>
+            `;
+
+            container.appendChild(item);
+        }
+    );
+}
+
+    // Service areas management
+    const serviceAreas = [];
+
+    function addServiceArea() {
+      const input = document.getElementById('newServiceArea');
+      const area = input.value.trim();
+      
+      if (area && !serviceAreas.includes(area)) {
+        serviceAreas.push(area);
+        renderServiceAreas();
+        input.value = '';
+      }
+    }
+
+    function removeServiceArea(index) {
+      serviceAreas.splice(index, 1);
+      renderServiceAreas();
+    }
+
+    function renderServiceAreas() {
+      const container = document.getElementById('serviceAreasList');
+      container.innerHTML = serviceAreas.map((area, index) => `
+        <div class="service-area-tag">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+            <circle cx="12" cy="10" r="3"></circle>
+          </svg>
+          ${area}
+          <button type="button" onclick="removeServiceArea(${index})">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      `).join('');
+    }
+
+    // Allow adding area with Enter key
+    document.getElementById('newServiceArea').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        addServiceArea();
+      }
+    });
+
+    // Form submission
+    async function handleProfileSubmit(event) {
+    
+        event.preventDefault();
+    
+        if (!selectedMainCategory) {
+            alert("Please select a main category");
+            return;
+        }
+    
+        if (serviceAreas.length === 0) {
+            alert("Please add at least one service area");
+            return;
+        }
+    
+        const form = event.target;
+    
+        const submitBtn =
+            form.querySelector('button[type="submit"]');
+    
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = "Saving...";
+    
+        try {
+    
+            const formData = new FormData(form);
+    
+            // Main category
+            formData.append(
+                "mainCategory",
+                selectedMainCategory
+            );
+    
+            // Additional categories
+            formData.append(
+                "additionalCategories",
+                JSON.stringify(
+                    selectedAdditionalCategories
+                )
+            );
+    
+            // Service areas
+            formData.append(
+                "serviceAreas",
+                JSON.stringify(
+                    serviceAreas
+                )
+            );
+
+            const userId = localStorage.getItem("userId");
+
+formData.append(
+    "userId",
+    userId
+);
+    
+            // Portfolio images
+            portfolioImages.forEach((img) => {
+    
+                formData.append(
+                    "portfolioPhotos[]",
+                    img.file
+                );
+    
+            });
+
+            qualificationFiles.forEach(file => {
+
+                formData.append(
+                    "qualificationFiles[]",
+                    file
+                );
+            
+            });
+    
+            const response = await fetch(
+                "api/create_profile.php",
+                {
+                    method: "POST",
+                    body: formData
+                }
+            );
+    
+            const data =
+                await response.json();
+    
+            if (data.error) {
+    
+                alert(data.error);
+    
+                submitBtn.disabled = false;
+                submitBtn.innerHTML =
+                    "Save Profile";
+    
+                return;
+            }
+    
+            alert(
+                "Profile saved successfully!"
+            );
+    
+            window.location.href =
+                "profile.html?id=" +
+                data.profileId;
+    
+        }
+        catch (error) {
+    
+            console.error(error);
+    
+            alert(
+                "Something went wrong"
+            );
+    
+            submitBtn.disabled = false;
+    
+            submitBtn.innerHTML =
+                "Save Profile";
+        }
+    }
+
+    function saveDraft() {
+      alert('Draft saved successfully!');
+    }
+
+    // Add spin animation
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes spin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
+      .spin { animation: spin 1s linear infinite; }
+    `;
+    document.head.appendChild(style);
+  </script>
+</body>
+</html>
