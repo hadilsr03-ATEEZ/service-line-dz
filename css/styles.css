@@ -534,6 +534,43 @@ p {
   padding: 0 2rem;
 }
 
+.filter-search {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.category-list {
+    max-height: 250px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.category-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.category-item label {
+    cursor: pointer;
+}
+
+.main-category {
+    font-size: 0.9rem;
+    color: #475569;
+    font-weight: 600;
+
+    margin-top: 4px;
+    margin-bottom: 18px;
+}
+
+
+
 /* ============================================
    Categories Section
    ============================================ */

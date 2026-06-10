@@ -4,6 +4,7 @@ header("Content-Type: application/json");
 
 include "connect.php";
 
+
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
     echo json_encode([
         "error" => "Invalid request"
@@ -15,11 +16,33 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
    Required Data
 ========================= */
 
-$userId = $_POST["userId"] ?? null;
+$profileId = $_POST["profileId"] ?? null;
 
-if (!$userId) {
+
+$getProfile = $conn->prepare(
+    "SELECT profilePhoto,
+            coverPhoto,
+            portfolioPhotos,
+            qualificationFiles
+     FROM profiles
+     WHERE profileId = ?"
+);
+
+$getProfile->bind_param(
+    "i",
+    $profileId
+);
+
+$getProfile->execute();
+
+$oldProfile =
+    $getProfile
+    ->get_result()
+    ->fetch_assoc();
+
+if (!$profileId) {
     echo json_encode([
-        "error" => "User ID missing"
+        "error" => "Profile ID missing"
     ]);
     exit;
 }
@@ -101,7 +124,8 @@ if (!file_exists($uploadDir)) {
    Profile Photo
 ========================= */
 
-$profilePhoto = null;
+$profilePhoto =
+    $oldProfile["profilePhoto"];
 
 if (
     isset($_FILES["profilePhoto"]) &&
@@ -129,7 +153,8 @@ if (
    Cover Photo
 ========================= */
 
-$coverPhoto = null;
+$coverPhoto =
+    $oldProfile["coverPhoto"];
 
 if (
     isset($_FILES["coverPhoto"]) &&
@@ -157,8 +182,18 @@ if (
    Portfolio Photos
 ========================= */
 
-$portfolioPaths = [];
-$qualificationPaths = [];
+$portfolioPaths =
+    json_decode(
+        $oldProfile["portfolioPhotos"]
+        ?? "[]",
+        true
+    );
+$qualificationPaths =
+    json_decode(
+        $oldProfile["qualificationFiles"]
+        ?? "[]",
+        true
+    );
 
 if (isset($_FILES["portfolioPhotos"])) {
 
@@ -244,47 +279,39 @@ $qualificationFiles =
     json_encode($qualificationPaths);
 
 /* =========================
-   Insert Profile
+   Update Profile
 ========================= */
 
 $sql = "
-INSERT INTO profiles
-(
-    userId,
-    profilePhoto,
-    coverPhoto,
-    fullName,
-    aboutMe,
-    phone,
-    whatsapp,
-    instagram,
-    facebook,
-    tiktok,
-    wilayaId,
-    commune,
-    experience,
-    qualifications,
-    mainCategoryId,
-    additionalCategories,
-    portfolioPhotos,
-    qualificationFiles,
-    availability,
-    emergencyServices,
-    serviceAreas
-)
-VALUES
-(
-    ?,?,?,?,?,?,?,?,?,?,
-    ?,?,?,?,?,?,?,?,?,?,
-    ?
-)
+UPDATE profiles
+SET
+    profilePhoto = ?,
+    coverPhoto = ?,
+    fullName = ?,
+    aboutMe = ?,
+    phone = ?,
+    whatsapp = ?,
+    instagram = ?,
+    facebook = ?,
+    tiktok = ?,
+    wilayaId = ?,
+    commune = ?,
+    experience = ?,
+    qualifications = ?,
+    mainCategoryId = ?,
+    additionalCategories = ?,
+    portfolioPhotos = ?,
+    qualificationFiles = ?,
+    availability = ?,
+    emergencyServices = ?,
+    serviceAreas = ?
+WHERE profileId = ?
 ";
 
 $stmt = $conn->prepare($sql);
 
 $stmt->bind_param(
-    "issssssssssssssssssss",
-    $userId,
+    "ssssssssssssssssssisi",
     $profilePhoto,
     $coverPhoto,
     $fullName,
@@ -304,7 +331,8 @@ $stmt->bind_param(
     $qualificationFiles,
     $availability,
     $emergencyServices,
-    $serviceAreas
+    $serviceAreas,
+    $profileId
 );
 
 if (!$stmt->execute()) {
@@ -316,7 +344,14 @@ if (!$stmt->execute()) {
     exit;
 }
 
-$profileId = $conn->insert_id;
+echo json_encode([
+    "success" => true,
+    "profileId" => $profileId
+]);
+
+$conn->close();
+exit;
+
 
 foreach ($days as $day) {
 

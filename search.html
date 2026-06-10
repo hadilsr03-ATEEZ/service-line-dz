@@ -9,6 +9,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
+  <style>
+    
+  </style>
 </head>
 <body>
   <!-- Navigation -->
@@ -83,18 +86,67 @@
             <circle cx="12" cy="10" r="3"></circle>
           </svg>
           <select name="location">
-            <option value="">All Wilayas</option>
-            <option value="algiers">Algiers</option>
-            <option value="oran">Oran</option>
-            <option value="constantine">Constantine</option>
-            <option value="annaba">Annaba</option>
-            <option value="blida">Blida</option>
-            <option value="setif">Sétif</option>
-            <option value="batna">Batna</option>
-            <option value="tlemcen">Tlemcen</option>
-            <option value="bejaia">Béjaïa</option>
-            <option value="tizi-ouzou">Tizi Ouzou</option>
-          </select>
+    <option value="">All Wilayas</option>
+
+    <option value="01">Adrar</option>
+    <option value="02">Chlef</option>
+    <option value="03">Laghouat</option>
+    <option value="04">Oum El Bouaghi</option>
+    <option value="05">Batna</option>
+    <option value="06">Béjaïa</option>
+    <option value="07">Biskra</option>
+    <option value="08">Béchar</option>
+    <option value="09">Blida</option>
+    <option value="10">Bouira</option>
+    <option value="11">Tamanrasset</option>
+    <option value="12">Tébessa</option>
+    <option value="13">Tlemcen</option>
+    <option value="14">Tiaret</option>
+    <option value="15">Tizi Ouzou</option>
+    <option value="16">Alger</option>
+    <option value="17">Djelfa</option>
+    <option value="18">Jijel</option>
+    <option value="19">Sétif</option>
+    <option value="20">Saïda</option>
+    <option value="21">Skikda</option>
+    <option value="22">Sidi Bel Abbès</option>
+    <option value="23">Annaba</option>
+    <option value="24">Guelma</option>
+    <option value="25">Constantine</option>
+    <option value="26">Médéa</option>
+    <option value="27">Mostaganem</option>
+    <option value="28">M'Sila</option>
+    <option value="29">Mascara</option>
+    <option value="30">Ouargla</option>
+    <option value="31">Oran</option>
+    <option value="32">El Bayadh</option>
+    <option value="33">Illizi</option>
+    <option value="34">Bordj Bou Arréridj</option>
+    <option value="35">Boumerdès</option>
+    <option value="36">El Tarf</option>
+    <option value="37">Tindouf</option>
+    <option value="38">Tissemsilt</option>
+    <option value="39">El Oued</option>
+    <option value="40">Khenchela</option>
+    <option value="41">Souk Ahras</option>
+    <option value="42">Tipaza</option>
+    <option value="43">Mila</option>
+    <option value="44">Aïn Defla</option>
+    <option value="45">Naâma</option>
+    <option value="46">Aïn Témouchent</option>
+    <option value="47">Ghardaïa</option>
+    <option value="48">Relizane</option>
+    <option value="49">Timimoun</option>
+    <option value="50">Bordj Badji Mokhtar</option>
+    <option value="51">Ouled Djellal</option>
+    <option value="52">Béni Abbès</option>
+    <option value="53">In Salah</option>
+    <option value="54">In Guezzam</option>
+    <option value="55">Touggourt</option>
+    <option value="56">Djanet</option>
+    <option value="57">El M'Ghair</option>
+    <option value="58">El Meniaa</option>
+</select>
         </div>
         <button type="submit" class="btn btn-primary btn-lg">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -174,14 +226,6 @@
             </div>
           </div>
 
-          <div class="filter-group">
-            <h4>Price Range (DA/hr)</h4>
-            <div class="price-range">
-              <input type="number" placeholder="Min" name="priceMin">
-              <span>-</span>
-              <input type="number" placeholder="Max" name="priceMax">
-            </div>
-          </div>
 
           <div class="filter-group">
             <h4>Availability</h4>
@@ -228,246 +272,9 @@
             </div>
           </div>
 
-          <div class="results-grid">
-            <!-- Professional Card 1 -->
-            <article class="professional-card">
-              <div class="professional-cover">
-                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face" alt="Ahmed Benali" class="professional-avatar">
-                <span class="professional-badge">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                    <polyline points="22 4 12 14.01 9 11.01" fill="none" stroke="currentColor" stroke-width="2"></polyline>
-                  </svg>
-                  Verified
-                </span>
-              </div>
-              <div class="professional-content">
-                <h3 class="professional-name">Ahmed Benali</h3>
-                <p class="professional-title">Master Electrician</p>
-                <div class="professional-rating">
-                  <span class="stars">★★★★★</span>
-                  <span class="rating-text">4.9 (127 reviews)</span>
-                </div>
-                <div class="professional-location">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                    <circle cx="12" cy="10" r="3"></circle>
-                  </svg>
-                  Algiers, Algeria
-                </div>
-                <div class="professional-tags">
-                  <span class="tag">Wiring</span>
-                  <span class="tag">Installation</span>
-                  <span class="tag">Repairs</span>
-                </div>
-                <div class="professional-footer">
-                  <div class="professional-price">
-                    Starting at <span>2,500 DA</span>/hr
-                  </div>
-                  <a href="profile.html" class="btn btn-primary btn-sm">View Profile</a>
-                </div>
-              </div>
-            </article>
-
-            <!-- Professional Card 2 -->
-            <article class="professional-card">
-              <div class="professional-cover">
-                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face" alt="Karim Meziane" class="professional-avatar">
-                <span class="professional-badge">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                    <polyline points="22 4 12 14.01 9 11.01" fill="none" stroke="currentColor" stroke-width="2"></polyline>
-                  </svg>
-                  Verified
-                </span>
-              </div>
-              <div class="professional-content">
-                <h3 class="professional-name">Karim Meziane</h3>
-                <p class="professional-title">Full-Stack Developer</p>
-                <div class="professional-rating">
-                  <span class="stars">★★★★★</span>
-                  <span class="rating-text">5.0 (89 reviews)</span>
-                </div>
-                <div class="professional-location">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                    <circle cx="12" cy="10" r="3"></circle>
-                  </svg>
-                  Oran, Algeria
-                </div>
-                <div class="professional-tags">
-                  <span class="tag">React</span>
-                  <span class="tag">Node.js</span>
-                  <span class="tag">Mobile Apps</span>
-                </div>
-                <div class="professional-footer">
-                  <div class="professional-price">
-                    Starting at <span>5,000 DA</span>/hr
-                  </div>
-                  <a href="profile.html" class="btn btn-primary btn-sm">View Profile</a>
-                </div>
-              </div>
-            </article>
-
-            <!-- Professional Card 3 -->
-            <article class="professional-card">
-              <div class="professional-cover">
-                <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=100&h=100&fit=crop&crop=face" alt="Fatima Zohra" class="professional-avatar">
-                <span class="professional-badge">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                    <polyline points="22 4 12 14.01 9 11.01" fill="none" stroke="currentColor" stroke-width="2"></polyline>
-                  </svg>
-                  Verified
-                </span>
-              </div>
-              <div class="professional-content">
-                <h3 class="professional-name">Fatima Zohra</h3>
-                <p class="professional-title">Interior Designer</p>
-                <div class="professional-rating">
-                  <span class="stars">★★★★★</span>
-                  <span class="rating-text">4.8 (156 reviews)</span>
-                </div>
-                <div class="professional-location">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                    <circle cx="12" cy="10" r="3"></circle>
-                  </svg>
-                  Constantine, Algeria
-                </div>
-                <div class="professional-tags">
-                  <span class="tag">Residential</span>
-                  <span class="tag">Commercial</span>
-                  <span class="tag">3D Design</span>
-                </div>
-                <div class="professional-footer">
-                  <div class="professional-price">
-                    Starting at <span>8,000 DA</span>/project
-                  </div>
-                  <a href="profile.html" class="btn btn-primary btn-sm">View Profile</a>
-                </div>
-              </div>
-            </article>
-
-            <!-- Professional Card 4 -->
-            <article class="professional-card">
-              <div class="professional-cover">
-                <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=100&h=100&fit=crop&crop=face" alt="Youcef Hamidi" class="professional-avatar">
-                <span class="professional-badge">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                    <polyline points="22 4 12 14.01 9 11.01" fill="none" stroke="currentColor" stroke-width="2"></polyline>
-                  </svg>
-                  Verified
-                </span>
-              </div>
-              <div class="professional-content">
-                <h3 class="professional-name">Youcef Hamidi</h3>
-                <p class="professional-title">Professional Plumber</p>
-                <div class="professional-rating">
-                  <span class="stars">★★★★☆</span>
-                  <span class="rating-text">4.7 (203 reviews)</span>
-                </div>
-                <div class="professional-location">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                    <circle cx="12" cy="10" r="3"></circle>
-                  </svg>
-                  Blida, Algeria
-                </div>
-                <div class="professional-tags">
-                  <span class="tag">Emergency</span>
-                  <span class="tag">Installation</span>
-                  <span class="tag">Maintenance</span>
-                </div>
-                <div class="professional-footer">
-                  <div class="professional-price">
-                    Starting at <span>2,000 DA</span>/hr
-                  </div>
-                  <a href="profile.html" class="btn btn-primary btn-sm">View Profile</a>
-                </div>
-              </div>
-            </article>
-
-            <!-- Professional Card 5 -->
-            <article class="professional-card">
-              <div class="professional-cover">
-                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face" alt="Amina Khelifi" class="professional-avatar">
-                <span class="professional-badge">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                    <polyline points="22 4 12 14.01 9 11.01" fill="none" stroke="currentColor" stroke-width="2"></polyline>
-                  </svg>
-                  Verified
-                </span>
-              </div>
-              <div class="professional-content">
-                <h3 class="professional-name">Amina Khelifi</h3>
-                <p class="professional-title">Professional Tailor</p>
-                <div class="professional-rating">
-                  <span class="stars">★★★★★</span>
-                  <span class="rating-text">4.9 (78 reviews)</span>
-                </div>
-                <div class="professional-location">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                    <circle cx="12" cy="10" r="3"></circle>
-                  </svg>
-                  Sétif, Algeria
-                </div>
-                <div class="professional-tags">
-                  <span class="tag">Traditional</span>
-                  <span class="tag">Modern</span>
-                  <span class="tag">Alterations</span>
-                </div>
-                <div class="professional-footer">
-                  <div class="professional-price">
-                    Starting at <span>3,000 DA</span>/item
-                  </div>
-                  <a href="profile.html" class="btn btn-primary btn-sm">View Profile</a>
-                </div>
-              </div>
-            </article>
-
-            <!-- Professional Card 6 -->
-            <article class="professional-card">
-              <div class="professional-cover">
-                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face" alt="Mohamed Zerrouki" class="professional-avatar">
-                <span class="professional-badge">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                    <polyline points="22 4 12 14.01 9 11.01" fill="none" stroke="currentColor" stroke-width="2"></polyline>
-                  </svg>
-                  Verified
-                </span>
-              </div>
-              <div class="professional-content">
-                <h3 class="professional-name">Mohamed Zerrouki</h3>
-                <p class="professional-title">Professional Painter</p>
-                <div class="professional-rating">
-                  <span class="stars">★★★★☆</span>
-                  <span class="rating-text">4.6 (145 reviews)</span>
-                </div>
-                <div class="professional-location">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                    <circle cx="12" cy="10" r="3"></circle>
-                  </svg>
-                  Annaba, Algeria
-                </div>
-                <div class="professional-tags">
-                  <span class="tag">Interior</span>
-                  <span class="tag">Exterior</span>
-                  <span class="tag">Decorative</span>
-                </div>
-                <div class="professional-footer">
-                  <div class="professional-price">
-                    Starting at <span>1,800 DA</span>/m²
-                  </div>
-                  <a href="profile.html" class="btn btn-primary btn-sm">View Profile</a>
-                </div>
-              </div>
-            </article>
+          <div class="results-grid" id="resultsGrid">
+            
+            <div id="testCardContainer"></div>
           </div>
 
           <!-- Pagination -->
@@ -572,5 +379,183 @@
   </footer>
 
   <script src="js/main.js"></script>
+  <script>
+    async function testApi() {
+    
+        const response =
+        await fetch("api/get_profiles.php");
+    
+        const data =
+        await response.json();
+    
+        console.log(data);
+    
+        const profiles = data.profiles;
+        const profile = data.profiles[1];
+
+        const wilayas = {
+            "01": "Adrar",
+            "02": "Chlef",
+            "03": "Laghouat",
+            "04": "Oum El Bouaghi",
+            "05": "Batna",
+            "06": "Béjaïa",
+            "07": "Biskra",
+            "08": "Béchar",
+            "09": "Blida",
+            "10": "Bouira",
+            "11": "Tamanrasset",
+            "12": "Tébessa",
+            "13": "Tlemcen",
+            "14": "Tiaret",
+            "15": "Tizi Ouzou",
+            "16": "Alger",
+            "17": "Djelfa",
+            "18": "Jijel",
+            "19": "Sétif",
+            "20": "Saïda",
+            "21": "Skikda",
+            "22": "Sidi Bel Abbès",
+            "23": "Annaba",
+            "24": "Guelma",
+            "25": "Constantine",
+            "26": "Médéa",
+            "27": "Mostaganem",
+            "28": "M'Sila",
+            "29": "Mascara",
+            "30": "Ouargla",
+            "31": "Oran",
+            "32": "El Bayadh",
+            "33": "Illizi",
+            "34": "Bordj Bou Arréridj",
+            "35": "Boumerdès",
+            "36": "El Tarf",
+            "37": "Tindouf",
+            "38": "Tissemsilt",
+            "39": "El Oued",
+            "40": "Khenchela",
+            "41": "Souk Ahras",
+            "42": "Tipaza",
+            "43": "Mila",
+            "44": "Aïn Defla",
+            "45": "Naâma",
+            "46": "Aïn Témouchent",
+            "47": "Ghardaïa",
+            "48": "Relizane",
+            "49": "Timimoun",
+            "50": "Bordj Badji Mokhtar",
+            "51": "Ouled Djellal",
+            "52": "Béni Abbès",
+            "53": "In Salah",
+            "54": "In Guezzam",
+            "55": "Touggourt",
+            "56": "Djanet",
+            "57": "El M'Ghair",
+            "58": "El Meniaa"
+        };
+
+        const wilayaName = wilayas[profile.wilaya] || profile.wilaya;
+
+
+        const container =
+        document.getElementById(
+            "testCardContainer"
+        );
+
+        const photo =
+        profile.profilePhoto
+            ? profile.profilePhoto
+            : "uploads/default-avatar.png";
+
+        const additionalCategories =
+    profile.additionalCategories
+        ? JSON.parse(profile.additionalCategories)
+        : [];
+    
+        container.innerHTML = `
+
+<article class="professional-card">
+
+    <div class="professional-cover">
+
+        <img
+            src="${profile.profilePhoto}"
+            alt="${profile.fullName}"
+            class="professional-avatar"
+        >
+
+        <span class="professional-badge">
+            Verified
+        </span>
+
+    </div>
+
+    <div class="professional-content">
+
+        <h3 class="professional-name">
+            ${profile.fullName}
+        </h3>
+        <p class="main-category">
+            ${profile.mainCategory}
+        </p>
+
+        <div class="professional-location">
+        
+            <svg width="16"
+                 height="16"
+                 viewBox="0 0 24 24"
+                 fill="none"
+                 stroke="currentColor"
+                 stroke-width="2">
+        
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+        
+                <circle cx="12"
+                        cy="10"
+                        r="3"></circle>
+        
+            </svg>
+        
+            ${wilayaName}, ${profile.wilaya}
+        
+        </div>
+
+        <div class="professional-tags">
+        
+            ${
+                additionalCategories.length > 0
+                ?
+                `<span class="tag">
+                    ${additionalCategories[0]}
+                </span>`
+                :
+                ""
+            }
+        
+        </div>
+
+        <div class="professional-footer">
+
+            <a
+                href="profile.html?id=${profile.profileId}"
+                class="btn btn-primary btn-sm">
+
+                View Profile
+
+            </a>
+
+        </div>
+
+    </div>
+
+</article>
+
+`;
+    }
+    
+    testApi();
+    
+
+  </script>
 </body>
 </html>

@@ -20,9 +20,19 @@ if (!$profileId) {
 ========================= */
 
 $sql = "
-SELECT *
-FROM profiles
-WHERE profileId = ?
+SELECT
+    p.*,
+    c.name AS mainCategoryName,
+    w.name AS wilayaName
+FROM profiles p
+
+LEFT JOIN category c
+    ON p.mainCategoryId = c.categoryId
+
+LEFT JOIN wilaya w
+    ON p.wilayaId = w.wilayaId
+
+WHERE p.profileId = ?
 LIMIT 1
 ";
 

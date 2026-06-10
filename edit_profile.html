@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Create your professional profile on ServiceLine DZ - Showcase your services to clients across Algeria.">
-  <title>Create Your Profile - ServiceLine DZ</title>
+  <meta name="description" content="Edit your professional profile on ServiceLine DZ - Update your services and information.">
+  <title>Edit Your Profile - ServiceLine DZ</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
   <style>
-    /* Create Profile Page Specific Styles */
+    /* Edit Profile Page Specific Styles */
     .create-profile-page {
       min-height: 100vh;
       background: var(--background-alt);
@@ -940,7 +940,7 @@
     margin-top: 1rem;
   }
 
-  .camera-btn {
+.camera-btn {
   position: absolute;
 
   bottom: 6px;
@@ -989,8 +989,8 @@
     <!-- Header -->
     <header class="profile-header">
       <div class="container">
-        <h1>Create Your Professional Profile</h1>
-        <p>Showcase your services and start receiving clients across Algeria</p>
+        <h1>Edit Your Professional Profile</h1>
+        <p>Update your services and profile information</p>
         <div class="progress-steps">
           <div class="progress-step completed">
             <span class="step-num">
@@ -1002,7 +1002,7 @@
           </div>
           <div class="progress-step active">
             <span class="step-num">2</span>
-            Profile Setup
+            Edit Profile
           </div>
           <div class="progress-step">
             <span class="step-num">3</span>
@@ -1068,6 +1068,7 @@
 
 </div>
               </div>
+              
             </div>
             <div class="photo-upload" style="flex: 2;">
               <label>Cover Photo</label>
@@ -1105,6 +1106,7 @@
 
 </div>
               </div>
+              
             </div>
           </div>
         </div>
@@ -1267,8 +1269,6 @@
           </div>
         </div>
 
-        
-
         <!-- Service Categories Section -->
         <div class="form-section">
           <div class="form-section-header">
@@ -1330,6 +1330,7 @@
             </div>
           </div>
         </div>
+
 
 <!-- Qualifications & Experience Section -->
         <div class="form-section">
@@ -1669,19 +1670,17 @@
 
         <!-- Form Actions -->
         <div class="form-actions">
-          <button type="button" class="btn btn-ghost" onclick="saveDraft()">
+          <button type="button" class="btn btn-ghost" onclick="cancelEdit()">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
-              <polyline points="17 21 17 13 7 13 7 21"></polyline>
-              <polyline points="7 3 7 8 15 8"></polyline>
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
             </svg>
-            Save as Draft
+            Cancel
           </button>
           <button type="submit" class="btn btn-primary btn-lg">
-            Save Profile
+            Save Changes
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-              <polyline points="12 5 19 12 12 19"></polyline>
+              <polyline points="20 6 9 17 4 12"></polyline>
             </svg>
           </button>
         </div>
@@ -1705,6 +1704,301 @@
 
 <script src="js/main.js"></script>
   <script>
+
+    const urlParams =
+      new URLSearchParams(
+        window.location.search
+      );
+    
+    const profileId =
+      urlParams.get("id");
+
+    // ========== PAGE INITIALIZATION ==========
+    // Load existing profile data on page load
+    document.addEventListener('DOMContentLoaded', async function() {
+    
+        await loadCategories();
+        await loadWilayas();
+        await loadProfileData();
+    
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function(e) {
+    
+            if (!e.target.closest('#mainCategoryWrapper')) {
+                closeMainCategoryDropdown();
+            }
+    
+            if (!e.target.closest('#additionalCategoryWrapper')) {
+                closeAdditionalCategoryDropdown();
+            }
+    
+        });
+    
+    });
+
+    // ========== LOAD PROFILE DATA ==========
+    async function loadProfileData() {
+    
+      const response =
+        await fetch(`api/get_profile.php?id=${profileId}`);
+    
+      const responseData = await response.json();
+
+      console.log("PROFILE DATA:", responseData);
+
+      const profileData = responseData.profile;
+      
+      console.log("PROFILE:", responseData.profile);
+      
+      console.log("SERVICES:", responseData.services);
+      
+      // Pre-fill Basic Information
+      if (profileData.fullName) document.getElementById('fullName').value = profileData.fullName;
+      if (profileData.aboutMe) document.getElementById('aboutMe').value = profileData.aboutMe;
+      
+      // Pre-fill Contact Information
+      if (profileData.phone) document.getElementById('phone').value = profileData.phone;
+      if (profileData.whatsapp) document.getElementById('whatsapp').value = profileData.whatsapp;
+      if (profileData.instagram) document.getElementById('instagram').value = profileData.instagram;
+      if (profileData.facebook) document.getElementById('facebook').value = profileData.facebook;
+      if (profileData.tiktok) document.getElementById('tiktok').value = profileData.tiktok;
+      
+      // Pre-fill Location
+      if (profileData.wilayaId) document.getElementById('wilaya').value = profileData.wilayaId;
+      if (profileData.commune) document.getElementById('commune').value = profileData.commune;
+      
+      // Pre-fill Qualifications & Experience
+      if (profileData.experience) document.getElementById('experience').value = profileData.experience;
+      if (profileData.qualifications) document.getElementById('qualifications').value = profileData.qualifications;
+      
+      // Pre-fill Categories
+      if (profileData.mainCategoryId) {
+        selectedMainCategory = profileData.mainCategoryId.toString();
+        selectMainCategory(profileData.mainCategoryId.toString());
+      }
+      if (profileData.additionalCategories) {
+      
+        const additionalCategories =
+          JSON.parse(
+            profileData.additionalCategories
+          );
+      
+        additionalCategories.forEach(
+          (cat) => {
+      
+            if (
+              !selectedAdditionalCategories.includes(cat)
+            ) {
+              selectedAdditionalCategories.push(cat);
+            }
+      
+          }
+        );
+      
+        renderAdditionalCategoryChips();
+      
+      }
+      
+      // Pre-fill Services
+      if (responseData.services && Array.isArray(responseData.services)) {
+        const servicesList = document.getElementById('servicesList');
+        servicesList.innerHTML = '';
+        responseData.services.forEach((service) => {
+          addServiceItem(service.serviceName, service.startingPrice, service.serviceDescription);
+          }
+        );
+      }
+      
+      // Pre-fill Availability
+      if (profileData.availability) {
+      
+        const availability =
+          JSON.parse(
+            profileData.availability
+          );
+      
+        Object.keys(
+          availability
+        ).forEach((day) => {
+      
+          const dayCheckbox =
+            document.getElementById(day);
+      
+          if (
+            dayCheckbox &&
+            availability[day]
+          ) {
+      
+            dayCheckbox.checked = true;
+      
+            document.querySelector(
+              `input[name="${day}_start"]`
+            ).value =
+              availability[day].start ||
+              "08:00";
+      
+            document.querySelector(
+              `input[name="${day}_end"]`
+            ).value =
+              availability[day].end ||
+              "17:00";
+      
+          }
+      
+        });
+      
+      }
+      
+      // Pre-fill Emergency Services
+      if (profileData.emergencyServices == 1) {
+        document.getElementById('emergencyServices').checked = true;
+      }
+      
+      // Pre-fill Service Areas
+      if (profileData.serviceAreas) {
+        serviceAreas = JSON.parse(profileData.serviceAreas);
+        serviceAreas.forEach((area) => {addServiceAreaTag(area);});
+      }
+      
+      // Pre-fill Photos (display only, not re-upload)
+      if (profileData.profilePhoto) {
+        const preview = document.getElementById('profilePhotoPreview');
+        preview.src = profileData.profilePhoto;
+        preview.style.display = 'block';
+        document.querySelector('.upload-area.profile-photo .upload-content').style.display = 'none';
+      }
+      if (profileData.coverPhoto) {
+        const preview = document.getElementById('coverPhotoPreview');
+        preview.src = profileData.coverPhoto;
+        preview.style.display = 'block';
+        document.querySelector('.upload-area.cover-photo .upload-content').style.display = 'none';
+      }
+
+      // Pre-fill Portfolio Photos
+      if (profileData.portfolioPhotos) {
+      
+        const portfolioPhotosData =
+          JSON.parse(
+            profileData.portfolioPhotos
+          );
+      
+        portfolioPhotosData.forEach(
+          (photoPath) => {
+      
+            portfolioImages.push({
+              dataUrl: photoPath
+            });
+      
+          }
+        );
+      
+        renderPortfolio();
+      
+      }
+
+      // Pre-fill Qualification Files
+      if (
+        profileData.qualificationFiles
+      ) {
+      
+        const qualificationFilesData =
+          JSON.parse(
+            profileData.qualificationFiles
+          );
+      
+        qualificationFilesData.forEach(
+          (filePath) => {
+      
+            qualificationFiles.push({
+              name:
+                filePath.split("/").pop(),
+              type: "application/pdf"
+            });
+      
+          }
+        );
+      
+        renderQualificationFiles();
+      
+      }
+
+      
+    }
+
+    
+
+    // Helper function to retrieve profile data from localStorage
+    function getProfileFromLocalStorage() {
+      try {
+        const data = localStorage.getItem('profileData');
+        return data ? JSON.parse(data) : null;
+      } catch (e) {
+        console.error('Error retrieving profile data:', e);
+        return null;
+      }
+    }
+
+    // Helper function to save service item
+    function addServiceItem(name = '', price = '', description = '') {
+      const servicesList = document.getElementById('servicesList');
+      const serviceCount = servicesList.children.length + 1;
+      
+      const serviceHTML = `
+        <div class="service-item">
+          <div class="service-item-header">
+            <h4>Service ${serviceCount}</h4>
+            <button type="button" class="remove-service" onclick="removeService(this)" style="${serviceCount === 1 ? 'display: none;' : ''}">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+          </div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Service Name *</label>
+              <input type="text" name="serviceName[]" class="form-control" placeholder="e.g., Pipe Repair, Website Design" value="${name}" required>
+            </div>
+            <div class="form-group">
+              <label>Starting Price (DZD) *</label>
+              <input type="number" name="servicePrice[]" class="form-control" placeholder="e.g., 2000" value="${price}" required>
+            </div>
+            <div class="form-group full-width">
+              <label>Description *</label>
+              <textarea name="serviceDescription[]" class="form-control" rows="2" placeholder="Describe what this service includes, what the client can expect, and any important details" required>${description}</textarea>
+            </div>
+          </div>
+        </div>
+      `;
+      
+      servicesList.innerHTML += serviceHTML;
+    }
+
+    // Helper function to add service area tag
+    function addServiceAreaTag(area) {
+      const serviceAreasList = document.getElementById('serviceAreasList');
+      const areaHTML = `
+        <div class="service-area-tag">
+          <span>${area}</span>
+          <button type="button" onclick="removeServiceArea(this)" style="background: none; border: none; padding: 0; cursor: pointer; color: var(--primary);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      `;
+      serviceAreasList.innerHTML += areaHTML;
+    }
+
+
+    // ========== CANCEL EDIT ==========
+    function cancelEdit() {
+      if (confirm('Are you sure you want to cancel? Any unsaved changes will be lost.')) {
+        window.location.href = 'profile.html';
+      }
+    }
+
     // Image preview functionality
     function previewImage(input, previewId) {
       const preview = document.getElementById(previewId);
@@ -1725,30 +2019,26 @@
       }
     }
 
+    // Categories data with expanded list
     let allCategories = [];
 
     // State
     let selectedMainCategory = null;
     let selectedAdditionalCategories = [];
 
-    document.addEventListener('DOMContentLoaded', async function() {
-    
-      await loadCategories();
-      await loadWilayas();
-    
+    // Initialize dropdowns on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      loadCategories();
+      
       // Close dropdowns when clicking outside
       document.addEventListener('click', function(e) {
-    
         if (!e.target.closest('#mainCategoryWrapper')) {
           closeMainCategoryDropdown();
         }
-    
         if (!e.target.closest('#additionalCategoryWrapper')) {
           closeAdditionalCategoryDropdown();
         }
-    
       });
-    
     });
 
     // ========== MAIN CATEGORY (Single Select) ==========
@@ -2151,7 +2441,7 @@ function renderQualificationFiles() {
 }
 
     // Service areas management
-    const serviceAreas = [];
+    let serviceAreas = [];
 
     function addServiceArea() {
       const input = document.getElementById('newServiceArea');
@@ -2196,7 +2486,6 @@ function renderQualificationFiles() {
       }
     });
 
-    // Form submission
     async function handleProfileSubmit(event) {
     
         event.preventDefault();
@@ -2217,7 +2506,7 @@ function renderQualificationFiles() {
             form.querySelector('button[type="submit"]');
     
         submitBtn.disabled = true;
-        submitBtn.innerHTML = "Saving...";
+        submitBtn.innerHTML = "Updating...";
     
         try {
     
@@ -2244,35 +2533,38 @@ function renderQualificationFiles() {
                     serviceAreas
                 )
             );
-
-            const userId = localStorage.getItem("userId");
-
-formData.append(
-    "userId",
-    userId
-);
+    
+            formData.append(
+                "profileId",
+                profileId
+            );
     
             // Portfolio images
             portfolioImages.forEach((img) => {
     
-                formData.append(
-                    "portfolioPhotos[]",
-                    img.file
-                );
+                if (img.file) {
+    
+                    formData.append(
+                        "portfolioPhotos[]",
+                        img.file
+                    );
+    
+                }
     
             });
-
+    
+            // Qualification files
             qualificationFiles.forEach(file => {
-
+    
                 formData.append(
                     "qualificationFiles[]",
                     file
                 );
-            
+    
             });
     
             const response = await fetch(
-                "api/create_profile.php",
+                "api/update_profile.php",
                 {
                     method: "POST",
                     body: formData
@@ -2288,13 +2580,13 @@ formData.append(
     
                 submitBtn.disabled = false;
                 submitBtn.innerHTML =
-                    "Save Profile";
+                    "Save Changes";
     
                 return;
             }
     
             alert(
-                "Profile saved successfully!"
+                "Profile updated successfully!"
             );
     
             window.location.href =
@@ -2313,7 +2605,7 @@ formData.append(
             submitBtn.disabled = false;
     
             submitBtn.innerHTML =
-                "Save Profile";
+                "Save Changes";
         }
     }
 
@@ -2332,7 +2624,6 @@ formData.append(
     `;
     document.head.appendChild(style);
 
-
     async function loadCategories() {
     
         try {
@@ -2344,7 +2635,7 @@ formData.append(
             if (data.success) {
     
                 allCategories = data.categories.map(category => ({
-                    value: category.categoryId,
+                    value: category.categoryId.toString(),
                     label: category.name
                 }));
     
@@ -2366,9 +2657,7 @@ formData.append(
         try {
     
             const response =
-                await fetch(
-                    "api/get_wilayas.php"
-                );
+                await fetch("api/get_wilayas.php");
     
             const data =
                 await response.json();
@@ -2376,39 +2665,31 @@ formData.append(
             if (data.success) {
     
                 const wilayaSelect =
-                    document.getElementById(
-                        "wilaya"
-                    );
+                    document.getElementById("wilaya");
     
-                data.wilayas.forEach(
-                    wilaya => {
+                wilayaSelect.innerHTML =
+                    '<option value="">Select Wilaya</option>';
     
-                        const option =
-                            document.createElement(
-                                "option"
-                            );
+                data.wilayas.forEach(wilaya => {
     
-                        option.value =
-                            wilaya.wilayaId;
+                    const option =
+                        document.createElement("option");
     
-                        option.textContent =
-                            wilaya.name;
+                    option.value =
+                        wilaya.wilayaId;
     
-                        wilayaSelect.appendChild(
-                            option
-                        );
+                    option.textContent =
+                        wilaya.name;
     
-                    }
-                );
+                    wilayaSelect.appendChild(option);
+    
+                });
     
             }
     
         } catch (error) {
     
-            console.error(
-                "Error loading wilayas:",
-                error
-            );
+            console.error(error);
     
         }
     
