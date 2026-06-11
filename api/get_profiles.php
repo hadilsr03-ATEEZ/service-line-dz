@@ -6,17 +6,29 @@ include "connect.php";
 
 $sql = "
 SELECT
-    profileId,
-    profilePhoto,
-    fullName,
-    wilaya,
-    mainCategory,
-    additionalCategories,
-    serviceAreas,
-    emergencyServices,
-    createdAt
-FROM profiles
-ORDER BY createdAt DESC
+    p.profileId,
+    p.profilePhoto,
+    p.fullName,
+    p.wilayaId,
+    p.commune,
+    p.mainCategoryId,
+    p.additionalCategories,
+    p.serviceAreas,
+    p.emergencyServices,
+    p.createdAt,
+
+    c.name AS mainCategoryName,
+    w.name AS wilayaName
+
+FROM profiles p
+
+LEFT JOIN category c
+    ON p.mainCategoryId = c.categoryId
+
+LEFT JOIN wilaya w
+    ON p.wilayaId = w.wilayaId
+
+ORDER BY p.createdAt DESC
 ";
 
 $result = $conn->query($sql);
